@@ -9,3 +9,4 @@ set(CMAKE_CXX_EXTENSIONS ON)
 include_directories(headers)
 
 add_executable(assignment1 start.cpp)
+add_executable(symTable symbolTableTest.cpp)
