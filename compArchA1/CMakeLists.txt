@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.13)
 
+project(assignment1)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
-include_directories(../headers/)
+include_directories(headers)
 
-add_executable(hello helloWorld.cpp)
-add_executable(lab2 lab2.cpp)
+add_executable(assignment1 start.cpp)
