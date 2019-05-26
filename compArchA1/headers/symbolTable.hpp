@@ -19,6 +19,7 @@ public:
 
     symbol(string, int, symbolType);
     void print();
+    symbolType intToSymbol(int = 0);
   };
 
   list<symbol> symbolList;
@@ -36,9 +37,18 @@ symbolTable::symbol::symbol(string n, int v, symbolType t) {
 }
 
 void symbolTable::symbol::print() {
-  ofstream csv("symbol.csv");
+  ofstream csv("symbol.csv", ios_base::app);
   csv << name << "," << value << "," << type << endl;
   csv.close();
+}
+
+symbolType symbolTable::symbol::intToSymbol(int type) {
+  symbolType t = UNKNOWN;
+  if (type == 1)
+    t = REGISTER;
+  else if (type == 2)
+    t = LABEL;
+  return t;
 }
 
 symbolTable::symbolTable() {
@@ -49,8 +59,13 @@ symbolTable::symbolTable() {
   auto s = new symbol(name, value, type);
   while (getline(startSymbols, line)) {
     auto tokens = splitString(line, ",");
-    for (auto i : tokens)
-      cout << i << endl;
+    name = tokens.front();
+    tokens.pop_front();
+    value = stoi(tokens.front());
+    tokens.pop_front();
+    type = static_cast<symbolType>(stoi(tokens.front()));
+    s = new symbol(name, value, type);
+    symbolList.push_back(*s);
   }
   startSymbols.close();
 }
