@@ -1,7 +1,6 @@
 #include "splitString.hpp"
 #include <cctype>
 #include <fstream>
-#include <iostream>
 
 using namespace std;
 
@@ -19,7 +18,6 @@ public:
 
     symbol(string, int, symbolType);
     void print();
-    symbolType intToSymbol(int = 0);
   };
 
   list<symbol> symbolList;
@@ -40,15 +38,6 @@ void symbolTable::symbol::print() {
   ofstream csv("symbol.csv", ios_base::app);
   csv << name << "," << value << "," << type << endl;
   csv.close();
-}
-
-symbolType symbolTable::symbol::intToSymbol(int type) {
-  symbolType t = UNKNOWN;
-  if (type == 1)
-    t = REGISTER;
-  else if (type == 2)
-    t = LABEL;
-  return t;
 }
 
 symbolTable::symbolTable() {
