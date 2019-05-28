@@ -1,12 +1,13 @@
 #include "sortTokens.hpp"
 #include "splitString.hpp"
+#include "checksum.hpp"
 #include <fstream>
 #include <iostream>
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
-  ifstream readFile(argv[1]);
+  ifstream readFile("Dimension-A.Munro.txt");
   ofstream writeFile("log.txt", ofstream::out);
 
   if (!readFile) { /* if file does not exist */
@@ -41,5 +42,7 @@ int main(int argc, char *argv[]) {
   cout << "First token to sort: " << sortMe << endl;
   readFile.close();
   writeFile.close();
+  auto xorCheckSum = xorSum();
+  cout<<"Xor checksum: "<<xorCheckSum<<endl;
   return 0;
 }
