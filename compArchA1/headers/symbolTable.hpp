@@ -3,6 +3,7 @@
 #include <cctype>
 #include <fstream>
 #include <iostream>
+#define MAX_LABEL_LENGTH 32
 
 using namespace std;
 
@@ -67,7 +68,7 @@ bool symbolTable::validSymbol(string s, int pc, string logFile) {
   auto valid = true;
   char c;
   c = s.at(0);
-  if (s.length() > 32) { /* invalid if longer than 32 characters */
+  if (s.length() > MAX_LABEL_LENGTH) { /* invalid if longer than 32 characters */
     log << "label '" << s << "' is longer than 32 charecters at PC " << pc << endl;
     return false;
   }
@@ -88,7 +89,6 @@ bool symbolTable::validSymbol(string s, int pc, string logFile) {
 
 symbolTable::symbol symbolTable::findSymbol(string label) {
   auto s = symbolList.front();
-  /* for (auto n = symbolList.begin(); n != symbolList.end(); ++n) //*/
   for (auto n : symbolList) {
     if (n.name == label)
       s = n;
