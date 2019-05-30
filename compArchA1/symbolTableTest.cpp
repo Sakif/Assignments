@@ -11,5 +11,7 @@ int main() {
   cout << symtab.validSymbol("asdjfhuucv;hnk.jewarfbbekjs..f", 4) << endl;
   cout << symtab.validSymbol("asdjfhuucv_hnk562jarfbbejsQT3f", 4) << endl;
   symtab.printTable();
+  auto s = symtab.findSymbol("SP");
+  cout<<s.name<<s.value<<s.type<<endl;
   return 0;
 }

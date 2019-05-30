@@ -1,6 +1,8 @@
+#pragma once
 #include "splitString.hpp"
 #include <cctype>
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 
@@ -25,6 +27,7 @@ public:
   symbolTable();
 
   bool validSymbol(string, int, string = "assembler.log");
+  symbol findSymbol(string);
   void printTable();
 };
 
@@ -81,6 +84,16 @@ bool symbolTable::validSymbol(string s, int pc, string logFile) {
   }
   log.close();
   return valid;
+}
+
+symbolTable::symbol symbolTable::findSymbol(string label) {
+  auto s = symbolList.front();
+  /* for (auto n = symbolList.begin(); n != symbolList.end(); ++n) //*/
+  for (auto n : symbolList) {
+    if (n.name == label)
+      s = n;
+  }
+  return s;
 }
 
 void symbolTable::printTable() {

@@ -7,5 +7,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 include_directories(headers)
 
-add_executable(assignment1 start.cpp)
-add_executable(symTable symbolTableTest.cpp)
+#add_executable(assignment1 start.cpp)
+add_executable(test symbolTableTest.cpp)

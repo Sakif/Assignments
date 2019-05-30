@@ -1,6 +1,6 @@
+#include "checksum.hpp"
 #include "sortTokens.hpp"
 #include "splitString.hpp"
-#include "checksum.hpp"
 #include <fstream>
 #include <iostream>
 
@@ -43,6 +43,6 @@ int main(int argc, char *argv[]) {
   readFile.close();
   writeFile.close();
   auto xorCheckSum = xorSum();
-  cout<<"Xor checksum: "<<xorCheckSum<<endl;
+  cout << "Xor checksum: " << xorCheckSum << endl;
   return 0;
 }
