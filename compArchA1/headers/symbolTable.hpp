@@ -12,27 +12,31 @@ enum symbolType { UNKNOWN,
                   LABEL };
 
 class symbolTable {
+private:
+  string logfileName;
+
 public:
   class symbol {
   public:
     string name;
-    int value;
+    short value;
     symbolType type;
 
-    symbol(string, int, symbolType);
+    symbol(string, short, symbolType);
     void print();
   };
 
   list<symbol> symbolList;
 
-  symbolTable();
+  symbolTable(string = "firstPass.log");
 
-  bool validSymbol(string, int, string = "assembler.log");
+  bool validSymbol(string, int);
   symbol findSymbol(string);
+  void addSymbol();
   void printTable();
 };
 
-symbolTable::symbol::symbol(string n, int v, symbolType t) {
+symbolTable::symbol::symbol(string n, short v, symbolType t) {
   name = n;
   value = v;
   type = t;
@@ -44,7 +48,12 @@ void symbolTable::symbol::print() {
   csv.close();
 }
 
-symbolTable::symbolTable() {
+symbolTable::symbolTable(string logName) {
+  /* This sets up the symbol table so it contains the values of the registers and stack pointer.
+   * Those values should be in a file called StartSymbols.csv
+   * Sets up the location of the logfile defaulting to assembler.log
+   */
+  logfileName = logName;
   ifstream startSymbols("StartSymbols.csv");
   string name = "", line = "";
   auto value = 0;
@@ -63,12 +72,12 @@ symbolTable::symbolTable() {
   startSymbols.close();
 }
 
-bool symbolTable::validSymbol(string s, int pc, string logFile) {
-  ofstream log(logFile, ios_base::app);
+bool symbolTable::validSymbol(string s, int pc) {
+  ofstream log(logfileName, ios_base::app);
   auto valid = true;
   char c;
   c = s.at(0);
-  if (s.length() > MAX_LABEL_LENGTH) { /* invalid if longer than 32 characters */
+  if (s.length() > MAX_LABEL_LENGTH) { /* invalid if longer than the maxumum label lenght characters */
     log << "label '" << s << "' is longer than 32 charecters at PC " << pc << endl;
     return false;
   }
