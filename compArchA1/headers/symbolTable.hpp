@@ -1,5 +1,6 @@
 #pragma once
 #include "splitString.hpp"
+#include <algorithm>
 #include <cctype>
 #include <fstream>
 #include <iostream>
@@ -24,6 +25,7 @@ public:
 
     symbol(string, short, symbolType);
     void print();
+    void update(short, symbolType);
   };
 
   list<symbol> symbolList;
@@ -32,9 +34,19 @@ public:
 
   bool validSymbol(string, int);
   symbol findSymbol(string);
-  void addSymbol();
+  void addSymbol(string, short, symbolType);
   void printTable();
 };
+
+void symbolTable::symbol::update(short pv, symbolType t) {
+  value = pv;
+  type = t;
+}
+
+void symbolTable::addSymbol(string l, short pc, symbolType t) {
+  symbol s(l, pc, t);
+  symbolList.push_back(s);
+}
 
 symbolTable::symbol::symbol(string n, short v, symbolType t) {
   name = n;
@@ -50,7 +62,7 @@ void symbolTable::symbol::print() {
 
 symbolTable::symbolTable(string logName) {
   /* This sets up the symbol table so it contains the values of the registers and stack pointer.
-   * Those values should be in a file called StartSymbols.csv
+   * Those values should be in a file called StartSymbols.csv.
    * Sets up the location of the logfile defaulting to assembler.log
    */
   logfileName = logName;
@@ -75,9 +87,8 @@ symbolTable::symbolTable(string logName) {
 bool symbolTable::validSymbol(string s, int pc) {
   ofstream log(logfileName, ios_base::app);
   auto valid = true;
-  char c;
-  c = s.at(0);
-  if (s.length() > MAX_LABEL_LENGTH) { /* invalid if longer than the maxumum label lenght characters */
+  char c = s.at(0);                    /* the first charecter */
+  if (s.length() > MAX_LABEL_LENGTH) { /* invalid if longer than the maximum label length characters */
     log << "label '" << s << "' is longer than 32 charecters at PC " << pc << endl;
     return false;
   }
@@ -97,12 +108,11 @@ bool symbolTable::validSymbol(string s, int pc) {
 }
 
 symbolTable::symbol symbolTable::findSymbol(string label) {
-  auto s = symbolList.front();
   for (auto n : symbolList) {
     if (n.name == label)
-      s = n;
+      return n;
   }
-  return s;
+  return symbol("", -1, UNKNOWN);
 }
 
 void symbolTable::printTable() {
