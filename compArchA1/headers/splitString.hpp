@@ -1,3 +1,8 @@
+/* see splitstring.md */
+
+#ifndef SPLITSTRING
+#define SPLITSTRING
+
 #pragma once
 #include <list>
 #include <string>
@@ -16,3 +21,5 @@ list<string> splitString(string line, string deliminator = " ") {
   stringTokens.push_back(line.substr(start, end - start));
   return stringTokens;
 }
+
+#endif

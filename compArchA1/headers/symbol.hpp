@@ -1,5 +1,4 @@
-#pragma once
-#include <string>
+/* see symbol.md */
 
 #ifndef SYMBOL_TYPE
 #define SYMBOL_TYPE
@@ -11,6 +10,10 @@ enum symbolType { UNKNOWN,
 
 #ifndef SYMBOL
 #define SYMBOL
+
+#pragma once
+#include <string>
+
 class symbol {
 public:
   string name;

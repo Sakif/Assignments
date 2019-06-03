@@ -1,3 +1,7 @@
+/* see symbolTable.md */
+#ifndef SYMBOL_TABLE
+#define SYMBOL_TABLE
+
 #pragma once
 #include "splitString.hpp"
 #include "symbol.hpp"
@@ -12,12 +16,13 @@ using namespace std;
 class symbolTable {
 private:
   string logfileName;
+  string startSymbols;
   symbol *start;
   unsigned int count;
   void pop(); /* needed for distructor */
 
 public:
-  symbolTable(string = "firstPass.log");
+  symbolTable(string = "firstPass.log", string ="StartSymbols.csv");
   ~symbolTable();
 
   bool validSymbol(string, int) const;
@@ -27,14 +32,9 @@ public:
   unsigned int symbolCount() const;
 };
 
-symbolTable::symbolTable(string logName) : logfileName(logName), count(0) {
-  /* This sets up the symbol table so it contains the values of the registers and stack pointer.
-   * Those values should be in a file called StartSymbols.csv.
-   * Sets up the location of the logfile defaulting to assembler.log
-   */
+symbolTable::symbolTable(string logName, string startSymbolsFile) : logfileName(logName),startSymbols(startSymbolsFile), count(0) {
   start = nullptr;
-
-  ifstream startSymbols("StartSymbols.csv");
+  ifstream startSymbolsCSV(startSymbolsFile);
   string name = "", line = "";
   auto value = 0;
   symbolType type = UNKNOWN;
@@ -48,7 +48,7 @@ symbolTable::symbolTable(string logName) : logfileName(logName), count(0) {
     type = static_cast<symbolType>(stoi(tokens.front()));
     addSymbol(name, value, type);
   }
-  startSymbols.close();
+  startSymbolsCSV.close();
 }
 
 void symbolTable::pop() {
@@ -117,3 +117,5 @@ void symbolTable::printTable(string out) const {
 unsigned int symbolTable::symbolCount() const {
   return count;
 }
+
+#endif
