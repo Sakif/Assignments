@@ -21,7 +21,18 @@ Will be filled out soon
 * +validSymbol(in label:string, in pc:int):bool
 * +findSymbol(in label:string):symbol
 * +addSymbol(in name:string, in value:short = 0, in type:symbolType = UNKNOWN)
-* +printTable(in symbolOut:string):Symbol Table csv
+* +printTable(in symbolOut:string = "symbols.csv"):symbol.csv
 * +symbolCount():unsigned int
 * -pop()
 ---
+### create()
+
+Sets up the symbol with default values. It takes in the name for the log file and starting symbol. They have default values for quick use, but can be changed if needed.
+
+### destroy()
+
+A destructor is needed as this class contains pointers.
+
+### pop()
+
+Is only designed to assist with the destructor
