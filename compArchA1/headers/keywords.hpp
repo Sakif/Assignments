@@ -12,6 +12,5 @@ public:
 
 keywords::keywords(string filename) {
   ifstream kwd(filename);
-
   kwd.close();
 }

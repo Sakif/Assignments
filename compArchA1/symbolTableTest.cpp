@@ -1,5 +1,5 @@
 #include "symbolTable.hpp"
-#include <iostream>
+#define DEBUG
 
 using namespace std;
 
@@ -10,21 +10,15 @@ int main() {
   cout << symtab.validSymbol("asdjfhuucv;hnk.jewarfbbekjs..fncs", 3) << endl;
   cout << symtab.validSymbol("asdjfhuucv;hnk.jewarfbbekjs..f", 4) << endl;
   cout << symtab.validSymbol("asdjfhuucv_hnk562jarfbbejsQT3f", 4) << endl;
-  symtab.printTable();
   auto s = symtab.findSymbol("LOOP");
-  if (s.value < 0) {
-    cout << "Symbol not found" << endl
-         << "Adding to symbol Table" << endl;
-    symtab.addSymbol("LOOP", 5, LABEL);
+  if (s == nullptr) {
+    cout << "not found" << endl;
+    symtab.addSymbol("LOOP");
   }
   s = symtab.findSymbol("LOOP");
-  if (s.value < 0) {
-    cout << "Symbol not found" << endl
-         << "Adding to symbol Table" << endl;
-    symtab.addSymbol("LOOP", 5, LABEL);
-  } else {
-    printf("Name %s, Value %d, Type %d\n", s.name.c_str(), s.value, s.type);
-  }
-
+  cout << s->type << endl;
+  s->update(8, LABEL);
+  cout << s->type << endl;
+  symtab.printTable();
   return 0;
 }
