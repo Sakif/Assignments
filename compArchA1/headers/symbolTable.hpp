@@ -22,7 +22,7 @@ private:
   void pop(); /* needed for distructor */
 
 public:
-  symbolTable(string = "firstPass.log", string ="StartSymbols.csv");
+  symbolTable(string = "firstPass.log", string = "StartSymbols.csv");
   ~symbolTable();
 
   bool validSymbol(string, int) const;
@@ -32,7 +32,7 @@ public:
   unsigned int symbolCount() const;
 };
 
-symbolTable::symbolTable(string logName, string startSymbolsFile) : logfileName(logName),startSymbols(startSymbolsFile), count(0) {
+symbolTable::symbolTable(string logName, string startSymbolsFile) : logfileName(logName), startSymbols(startSymbolsFile), count(0) {
   start = nullptr;
   ifstream startSymbolsCSV(startSymbolsFile);
   string name = "", line = "";
