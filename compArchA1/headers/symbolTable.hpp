@@ -9,8 +9,6 @@
 #include <fstream>
 #include <iostream>
 
-#define MAX_LABEL_LENGTH 32
-
 using namespace std;
 
 class symbolTable {
@@ -25,7 +23,6 @@ public:
   symbolTable(string = "firstPass.log", string = "StartSymbols.csv");
   ~symbolTable();
 
-  bool validSymbol(string, int) const;
   symbol *findSymbol(string) const;
   void addSymbol(string, short = 0, symbolType = UNKNOWN);
   void printTable(string = "symbols.csv") const;
@@ -61,33 +58,6 @@ void symbolTable::pop() {
 symbolTable::~symbolTable() {
   while (start != nullptr)
     pop();
-}
-
-bool symbolTable::validSymbol(string s, int pc) const {
-  ofstream log(logfileName, ios_base::app);
-  auto valid = true; /* the default condition */
-  char c = s.at(0);  /* the first charecter */
-
-  if (s.length() > MAX_LABEL_LENGTH) { /* invalid if longer than the maximum label length characters */
-    log << "label '" << s << "' is longer than 32 charecters at PC " << pc << endl;
-    return false;
-  }
-
-  if (!isalpha(c) && c != '_') { /* invalid if first charecter is not a alphabet and not underscore */
-    log << "label '" << s << "' has invalid first character at PC " << pc << endl;
-    return false;
-  }
-
-  for (auto i = 1; i < s.length(); i++) { /* invalid if other are not alphanumeric and not underscore */
-    c = s.at(i);
-    if (!isalnum(c) && c != '_') {
-      log << "label '" << s << "' has invalid characters at PC " << pc << endl;
-      return false;
-    }
-  }
-
-  log.close();
-  return valid;
 }
 
 void symbolTable::addSymbol(string name, short value, symbolType type) {
