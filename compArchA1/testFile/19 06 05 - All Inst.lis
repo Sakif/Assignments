@@ -1,0 +1,265 @@
+X-Makina Assembler - Version 2.0 (29 April 2019)
+.ASM file: 19 06 05 - All Inst.asm
+Time of execution: Tue May 28 17:40:56 2019
+
+
+  1	    	     	;
+  2	    	     	; Assemble all instructions
+  3	    	     	; Check opcodes
+  4	    	     	;
+  5	    	     	; Larry Hughes
+  6	    	     	; 28 May 2019 - Modified for XM2
+  7	    	     	;  1 May 2019 - Original test
+  8	    	     	; 
+  9	    	     	r0	equ	R0
+ 10	    	     	r1	equ	R1
+ 11	    	     	r2	equ	R1
+ 12	    	     	r3	equ	R1
+ 13	    	     	r4	equ	R1
+ 14	    	     	r5	equ	R5
+ 15	    	     	LR	equ	r5
+ 16	    	     	r6	equ	R6
+ 17	    	     	SP	equ	R6
+ 18	    	     	r7	equ	R7
+ 19	    	     	PC	equ	R7
+ 20	    	     	;
+ 21	    	     	CONST0	EQU	#0
+ 22	    	     	CONST1	EQU	#1
+ 23	    	     	CONST2	EQU	#2
+ 24	    	     	CONST4	EQU	#4
+ 25	    	     	CONST8	EQU	#8
+ 26	    	     	CONST16	EQU	$10
+ 27	    	     	CONST32	EQU	$20
+ 28	    	     	CONSTN1	EQU	$FF
+ 29	    	     	CONSTN1a	EQU	#-1
+ 30	    	     	CONSTN1b	EQU	$ffff
+ 31	    	     	;
+ 32	    	     		org	#64
+ 33	    	     	;
+ 34	0040	500A		LD	R1,R2
+ 35	0042	5053		LD.B	R2,R3
+ 36	0044	540A		ST	R1,R2
+ 37	0046	5453		ST.B	R2,R3
+ 38	    	     	;
+ 39	0048	508A		LD	R1+,R2
+ 40	004A	510A		LD	R1-,R2
+ 41	004C	528A		LD	+R1,R2
+ 42	004E	530A		LD	-R1,R2
+ 43	    	     	;
+ 44	0050	50CA		LD.B	R1+,R2
+ 45	0052	514A		LD.B	R1-,R2
+ 46	0054	52CA		LD.B	+R1,R2
+ 47	0056	534A		LD.B	-R1,R2
+ 48	    	     	;
+ 49	0058	548A		ST	R1,R2+
+ 50	005A	550A		ST	R1,R2-
+ 51	005C	568A		ST	R1,+R2
+ 52	005E	570A		ST	R1,-R2
+ 53	    	     	;
+ 54	0060	54CA		ST.B	R1,R2+
+ 55	0062	554A		ST.B	R1,R2-
+ 56	0064	56CA		ST.B	R1,+R2
+ 57	0066	574A		ST.B	R1,-R2
+ 58	    	     	;
+ 59	    	     	;	LDR	R1,#-500,R2	; Invalid relative value
+ 60	0068	8293		LDR	R2,#5,R3
+ 61	006A	82D3		LDR.B	R2,$5,R3
+ 62	006C	F893		STR	R2,R3,#-15
+ 63	006E	C2D3		STR.B	R2,R3,$5
+ 64	    	     	;
+ 65	0070	60D3		MOVL	$1a,R3
+ 66	0072	6A0B		MOVLZ	'A',R3
+ 67	0074	7893		MOVH	$1234,R3	; '12' in R3
+ 68	    	     	; Branching
+ 69	    	     		ORG	$100
+ 70	    	     	LOOP
+ 71	    	     		ORG	$200
+ 72	0200	1F7F		BL	LOOP
+ 73	0202	277E		BNE	LOOP
+ 74	0204	277D		BNZ	LOOP
+ 75	0206	237C		BEQ	LOOP
+ 76	0208	237B		BZ	LOOP
+ 77	020A	2F7A		BNC	LOOP
+ 78	020C	2F79		BLO	LOOP
+ 79	020E	2B78		BC	LOOP
+ 80	0210	2B77		BHS	LOOP
+ 81	0212	3376		BN	LOOP
+ 82	0214	3775		BGE	LOOP
+ 83	0216	3B74		BLT	LOOP
+ 84	0218	3F73		BRA	LOOP
+ 85	    	     	;
+ 86	    	     		ORG	$300
+ 87	0300	007F		BL	FWDREF
+ 88	0302	247E		BNE	FWDREF
+ 89	0304	247D		BNZ	FWDREF
+ 90	0306	207C		BEQ	FWDREF
+ 91	0308	207B		BZ	FWDREF
+ 92	030A	2C7A		BNC	FWDREF
+ 93	030C	2C79		BLO	FWDREF
+ 94	030E	2878		BC	FWDREF
+ 95	0310	2877		BHS	FWDREF
+ 96	0312	3076		BN	FWDREF
+ 97	0314	3475		BGE	FWDREF
+ 98	0316	3874		BLT	FWDREF
+ 99	0318	3C73		BRA	FWDREF
+100	    	     	;
+101	    	     		ORG	$400
+102	    	     	FWDREF
+103	    	     	;
+104	    	     	; Register-register
+105	0400	400A		ADD	R1,R2
+106	0402	4053		ADD.B	R2,R3
+107	0404	4113		ADDC	R2,R3	; ADD with Carry
+108	0406	4153		ADDC.B	R2,R3
+109	0408	4213		SUB	R2,R3
+110	040A	4253		SUB.B	R2,R3
+111	040C	4313		SUBC	R2,R3
+112	040E	4353		SUBC.B	R2,R3
+113	    	     	; 
+114	    	     	; This might require changes to the pre-assembler
+115	0410	440A		DADD	R1,R2	; BCD arithmetic
+116	0412	4453		DADD.B	R2,R3	; BCD arithmetic
+117	    	     	;
+118	0414	4513		CMP	R2,R3
+119	0416	4553		CMP.B	R2,R3
+120	0418	4613		XOR	R2,R3
+121	041A	4653		XOR.B	R2,R3
+122	041C	4713		AND	R2,R3
+123	041E	4753		AND.B	R2,R3
+124	0420	4813		BIT	R2,R3
+125	0422	4853		BIT.B	R2,R3
+126	0424	4913		BIC	R2,R3
+127	0426	4953		BIC.B	R2,R3
+128	0428	4A13		BIS	R2,R3
+129	042A	4A53		BIS.B	R2,R3
+130	042C	4B13		MOV	R2,R3
+131	042E	4B53		MOV.B	R2,R3
+132	    	     	; Constant-register
+133	0430	408A		ADD	$1,R2
+134	0432	40CB		ADD.B	$1,R3
+135	0434	418B		ADDC	$1,R3
+136	0436	41CB		ADDC.B	$1,R3
+137	0438	428B		SUB	#1,R3
+138	043A	42CB		SUB.B	#1,R3
+139	043C	438B		SUBC	#1,R3
+140	043E	43FB		SUBC.B	#-1,R3
+141	0440	43BB		SUBC.W	$FF,R3
+142	0442	43BB		SUBC	$ffff,R3
+143	    	     	; Named constant-register
+144	0444	4082		ADD	CONST0,R2
+145	0446	40CB		ADD.B	CONST1,R3
+146	0448	4193		ADDC	CONST2,R3
+147	044A	41DB		ADDC.B	CONST4,R3
+148	044C	42A3		SUB	CONST8,R3
+149	044E	42EB		SUB.B	CONST16,R3
+150	0450	43B3		SUBC	CONST32,R3
+151	0452	43FB		SUBC.B	CONSTN1,R3	
+152	0454	43FB		SUBC.B	CONSTN1a,R3
+153	0456	43FB		SUBC.B	CONSTN1b,R3
+154	    	     	;
+155	0458	4081		ADD	CONST0,r2
+156	045A	40C9		ADD.B	CONST1,r3
+157	045C	4191		ADDC	CONST2,r4
+158	045E	41DD		ADDC.B	CONST4,r5
+159	0460	42A6		SUB	CONST8,r6
+160	0462	42EF		SUB.B	CONST16,r7
+161	0464	43B7		SUBC	CONST32,PC
+162	0466	43FD		SUBC.B	CONSTN1,LR	
+163	0468	43FE		SUBC.B	CONSTN1a,SP
+164	046A	43FE		SUBC.B	CONSTN1b,r6
+165	    	     	;
+166	046C	448A		DADD	#1,R2	; BCD
+167	046E	44CB		DADD.B	$1,R3	; BCD
+168	    	     	;
+169	0470	458B		CMP	$1,R3
+170	0472	45CB		CMP.B	$1,R3
+171	0474	468B		XOR	$1,R3
+172	0476	46CB		XOR.B	$1,R3
+173	0478	478B		AND	$1,R3
+174	047A	47CB		AND.B	#1,R3
+175	047C	488B		BIT	#1,R3
+176	047E	48CB		BIT.B	#1,R3
+177	0480	498B		BIC	#1,R3
+178	0482	49CB		BIC.B	#1,R3
+179	0484	4A8B		BIS	#1,R3
+180	0486	4ACB		BIS.B	$1,R3
+181	    	     	;
+182	0488	4C0A		SWAP	R1,R2
+183	    	     	;
+184	048A	4D03		SRA	R3
+185	048C	4D42		SRA.B	R2
+186	048E	4E03		RRC	R3
+187	0490	4E42		RRC.B	R2
+188	0492	4F02		SWPB	R2
+189	0494	4F82		SXT	R2
+190	    	     	;
+191	    	     	;
+192	    	     	; New instructions for XM2
+193	    	     	; CEX - Conditional execution
+194	    	     	; SVC - Supervisory call
+195	    	     	;
+196	    	     	VECT3	equ	$3
+197	    	     	VECT4	equ	#4
+198	    	     	;
+199	    	     		org	$1000
+200	    	     	;
+201	1000	580F		SVC	#15
+202	1002	5800		svc	#0
+203	1004	5803		svc	VECT3
+204	    	     	;
+205	    	     	;	svc	#-4
+206	    	     	;
+207	    	     		org	#5000
+208	1388	5C1C		CEX	EQ,#3,#4
+209	138A	5C43		CEX	NE,#0,#3
+210	138C	5F80		CEX	AL,#0,#0
+211	138E	5E7F		CEX	LS,#7,#7
+212	    	     	;
+213	    	     	; Invalid CC, TC, and FC
+214	    	     	;	cex	XX,#3,#4
+215	    	     	;	cex	LT,#9,#4
+216	    	     	;	cex	gt,#2,#-4
+217	    	     	;
+218	    	     	
+219	    	     		END	LOOP
+
+Successful completion of assembly
+
+** Symbol table **
+Name                               	Type	Value	Decimal
+VECT4                              	LBL	0004	4
+VECT3                              	LBL	0003	3
+FWDREF                             	LBL	0400	1024
+LOOP                               	LBL	0100	256
+CONSTN1b                           	LBL	FFFF	-1
+CONSTN1a                           	LBL	FFFF	-1
+CONSTN1                            	LBL	00FF	255
+CONST32                            	LBL	0020	32
+CONST16                            	LBL	0010	16
+CONST8                             	LBL	0008	8
+CONST4                             	LBL	0004	4
+CONST2                             	LBL	0002	2
+CONST1                             	LBL	0001	1
+CONST0                             	LBL	0000	0
+PC                                 	REG	0007	7
+r7                                 	REG	0007	7
+SP                                 	REG	0006	6
+r6                                 	REG	0006	6
+LR                                 	REG	0005	5
+r5                                 	REG	0005	5
+r4                                 	REG	0001	1
+r3                                 	REG	0001	1
+r2                                 	REG	0001	1
+r1                                 	REG	0001	1
+r0                                 	REG	0000	0
+R7                                 	REG	0007	7
+R6                                 	REG	0006	6
+R5                                 	REG	0005	5
+R4                                 	REG	0004	4
+R3                                 	REG	0003	3
+R2                                 	REG	0002	2
+R1                                 	REG	0001	1
+R0                                 	REG	0000	0
+
+.XME file: C:\Users\larry\OneDrive\Courses\ECED 3403\X-Makina\Software\XM2 - Test files 2\19 06 05 - All Inst.xme
+

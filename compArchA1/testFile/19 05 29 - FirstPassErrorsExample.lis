@@ -1,0 +1,82 @@
+X-Makina Assembler - Version 2.1 (29 May 2019)
+.ASM file: 19 05 29 - FirstPassErrorsExample.asm
+Time of execution: Wed May 29 06:37:32 2019
+
+
+  1	    	     	;
+  2	    	     	; Examples of some first pass errors
+  3	    	     	; - Look at console output and .LIS file
+  4	    	     	;
+  5	    	     	; L. Hughes
+  6	    	     	; 29 May 2019 - Revised for XM2
+  7	    	     	; 11 May 2018 - original
+  8	    	     	
+  9	    	     	; Missing operand:
+ 10	    	     	START	equ
+			**** Directive EQU needs argument
+ 11	    	     	
+ 12	    	     	; Invalid operand
+ 13	    	     		byte	'123'
+			**** BYTE: Invalid number: '123'
+ 14	    	     	
+ 15	    	     	; Unexpected operand
+ 16	    	     		align	R1
+			**** ALIGN: Unexpected symbol
+ 17	    	     	
+ 18	    	     	; Missing '#' or '$':
+ 19	    	     		org	100
+			**** Label format unrecognized 100
+ 20	    	     	
+ 21	    	     	; Symbols not in symbol table:
+ 22	    	     		ld	r0,r1	
+			**** Invalid modifier or register: r0
+ 23	    	     	
+ 24	    	     	; Unknown instruction:
+ 25	    	     	Loop	lda	r3
+			**** Expecting INST or DIR
+ 26	    	     	
+ 27	    	     	; >"< not supported, should be >'<:
+ 28	    	     	Data	byte	"x"
+			**** BYTE: Invalid number: "x"
+ 29	    	     	
+ 30	    	     	; Operands in wrong order:
+ 31	    	     		add	R0,#1	
+			**** Invalid register: >#1<
+ 32	    	     	
+ 33	    	     	; Unknown instruction (beqx) treated as a label.  "Loop" then examined
+ 34	    	     	; and treated as an instruction:
+ 35	    	     		beqx	loop
+			**** Expecting INST or DIR
+ 36	    	     	
+ 37	    	     	; Unknown register
+ 38	    	     		swap	R1,R8	
+			**** Invalid register R8
+ 39	    	     	
+ 40	    	     	; Bad BSS value - unknown value
+ 41	    	     		BSS	ArraySize
+			**** BSS: Undefined label or negative value ArraySize
+ 42	    	     	
+ 43	    	     	; Duplicate label
+ 44	    	     	START	equ	#12
+			**** Duplicate label
+ 45	    	     	
+ 46	    	     	; Start not defined (put in symbol table as UNK - unknown symbol):
+ 47	    	     		end	Start
+First pass errors - assembly terminated
+
+** Symbol table **
+Name                               	Type	Value	Decimal
+Start                              	UNK	FFFF	-1
+ArraySize                          	UNK	FFFF	-1
+beqx                               	LBL	0002	2
+Data                               	LBL	0001	1
+Loop                               	LBL	0001	1
+START                              	LBL	0000	0
+R7                                 	REG	0007	7
+R6                                 	REG	0006	6
+R5                                 	REG	0005	5
+R4                                 	REG	0004	4
+R3                                 	REG	0003	3
+R2                                 	REG	0002	2
+R1                                 	REG	0001	1
+R0                                 	REG	0000	0
