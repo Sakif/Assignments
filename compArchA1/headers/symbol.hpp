@@ -1,4 +1,7 @@
-/* see symbol.md */
+/**
+ * Author: Sakif Fahmid Zaman
+ * Last modified: 
+ */
 
 #ifndef SYMBOL_TYPE
 #define SYMBOL_TYPE

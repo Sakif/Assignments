@@ -14,13 +14,12 @@ using namespace std;
 class symbolTable {
 private:
   string logfileName;
-  string startSymbols;
   symbol *start;
   unsigned int count;
   void pop(); /* needed for distructor */
 
 public:
-  symbolTable(string = "firstPass.log", string = "StartSymbols.csv");
+  symbolTable(string = "firstPass.log");
   ~symbolTable();
 
   symbol *findSymbol(string) const;
@@ -29,34 +28,20 @@ public:
   unsigned int symbolCount() const;
 };
 
-symbolTable::symbolTable(string logName, string startSymbolsFile) : logfileName(logName), startSymbols(startSymbolsFile), count(0) {
+symbolTable::symbolTable(string logName) : logfileName(logName), count(0) {
   start = nullptr;
-  /* ifstream startSymbolsCSV(startSymbolsFile);
-  string name = "", line = "";
-  auto value = 0;
-  symbolType type = UNKNOWN;
-  auto s = new symbol(name, value, type);
-  while (getline(startSymbols, line)) {
-    auto tokens = splitString(line, ",");
-    name = tokens.front();
-    tokens.pop_front();
-    value = stoi(tokens.front());
-    tokens.pop_front();
-    type = static_cast<symbolType>(stoi(tokens.front()));
-    addSymbol(name, value, type);
-  }
-  startSymbolsCSV.close();*/
-  addSymbol(R0, 0, REGISTER);
-  addSymbol(R1, 1, REGISTER);
-  addSymbol(R2, 2, REGISTER);
-  addSymbol(R3, 3, REGISTER);
-  addSymbol(R4, 4, REGISTER);
-  addSymbol(R5, 5, REGISTER);
-  addSymbol(LR, 5, REGISTER);
-  addSymbol(R6, 6, REGISTER);
-  addSymbol(SP, 6, REGISTER);
-  addSymbol(R7, 7, REGISTER);
-  addSymbol(PC, 7, REGISTER);
+  /* add the default registers */
+  addSymbol("R0", 0, REGISTER);
+  addSymbol("R1", 1, REGISTER);
+  addSymbol("R2", 2, REGISTER);
+  addSymbol("R3", 3, REGISTER);
+  addSymbol("R4", 4, REGISTER);
+  addSymbol("R5", 5, REGISTER);
+  addSymbol("LR", 5, REGISTER);
+  addSymbol("R6", 6, REGISTER);
+  addSymbol("SP", 6, REGISTER);
+  addSymbol("R7", 7, REGISTER);
+  addSymbol("PC", 7, REGISTER);
 }
 
 void symbolTable::pop() {
@@ -95,8 +80,6 @@ void symbolTable::printTable(string out) const {
   o.close();
 }
 
-unsigned int symbolTable::symbolCount() const {
-  return count;
-}
+unsigned int symbolTable::symbolCount() const { return count; }
 
 #endif
