@@ -5,8 +5,6 @@
 #pragma once
 #include "splitString.hpp"
 #include "symbol.hpp"
-#include <cctype>
-#include <fstream>
 #include <iostream>
 
 using namespace std;
@@ -24,8 +22,7 @@ public:
 
   symbol *findSymbol(string) const;
   void addSymbol(string, short = 0, symbolType = UNKNOWN);
-  void printTable(string = "symbols.csv") const;
-  unsigned int symbolCount() const;
+  void printTable(ostream) const;
 };
 
 symbolTable::symbolTable(string logName) : logfileName(logName), count(0) {
@@ -54,6 +51,7 @@ void symbolTable::pop() {
 symbolTable::~symbolTable() {
   while (start != nullptr)
     pop();
+  delete start;
 }
 
 void symbolTable::addSymbol(string name, short value, symbolType type) {
@@ -73,13 +71,11 @@ symbol *symbolTable::findSymbol(string label) const {
   return node;
 }
 
-void symbolTable::printTable(string out) const {
-  ofstream o(out, ios_base::app);
+void symbolTable::printTable(ostream o) const {
+  o << "** Symbol table **" << endl;
   for (auto n = start; n != nullptr; n = n->next)
-    o << n->name << "," << n->value << "," << n->type << endl;
-  o.close();
+    o << n->name << ", " << n->value << ", " << n->type << endl;
+  o << "There are " << count << " symbols" << endl;
 }
-
-unsigned int symbolTable::symbolCount() const { return count; }
 
 #endif
