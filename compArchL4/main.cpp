@@ -40,7 +40,6 @@ int main() {
   InstructionCode.inst._wordByte = BYTE;
   InstructionCode.inst._regCon = CONSTANT;
   InstructionCode.inst._opcode = OP_CMP;
-  printf("Instruction: 0x%04X\n", InstructionCode.sh);
 
   cout << "Instruction: 0x" << hex << InstructionCode.sh << endl;
 
