@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Symbol::Symbol(string l, SymbolType t, int v, Symbol *next) : label(l), type(t), value(v), nextSymbol(next) {}
+Symbol::Symbol(string l, SymbolType t, int v) : label(l), type(t), value(v) {}
 
 int Symbol::getValue() const {
   return value;

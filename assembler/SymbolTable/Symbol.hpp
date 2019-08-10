@@ -12,7 +12,7 @@ enum SymbolType {
   REGISTER
 };
 
-const string symbolTypeToString[] = {"UNK", "LBL", "REG"};
+const string symbolTypeToString[] = {"UNKNOWN", "LABEL", "REGISTER"};
 
 #endif
 
@@ -24,10 +24,9 @@ private:
   string label;
   SymbolType type;
   int value;
-  Symbol *nextSymbol;
 
 public:
-  Symbol(string, SymbolType, int, Symbol *);
+  Symbol(string, SymbolType, int);
   ~Symbol();
 
   string getLabel() const;
