@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Symbol::Symbol(string l, SymbolType t, int v) : label(l), type(t), value(v) {}
+Symbol::Symbol(string l, SymbolType t, int v, Symbol *nn) : label(l), type(t), value(v), nextSymbol(nn) {}
 
 int Symbol::getValue() const {
   return value;
@@ -23,4 +23,8 @@ string Symbol::getLabel() const {
 
 string Symbol::printType() const {
   return symbolTypeToString[type];
+}
+
+Symbol *Symbol::next() const {
+  return nextSymbol;
 }

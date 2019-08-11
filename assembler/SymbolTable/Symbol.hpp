@@ -16,17 +16,18 @@ const string symbolTypeToString[] = {"UNKNOWN", "LABEL", "REGISTER"};
 
 #endif
 
-#ifndef SYMBOL_H
-#define SYMBOL_H
+#ifndef SYMBOL
+#define SYMBOL
 
 class Symbol {
 private:
   string label;
   SymbolType type;
   int value;
+  Symbol *nextSymbol;
 
 public:
-  Symbol(string, SymbolType, int);
+  Symbol(string, SymbolType, int, Symbol *);
   ~Symbol();
 
   string getLabel() const;
@@ -34,6 +35,7 @@ public:
   bool inUnknown() const;
   string printType() const;
   void update(int, SymbolType);
+  Symbol *next() const;
 };
 
 #endif
