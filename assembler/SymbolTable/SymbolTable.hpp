@@ -15,6 +15,7 @@ private:
 public:
   SymbolTable();
   /* ~SymbolTable(); */
+  static error_type validLabel(string);
 
   void addSymbol(string, int, SymbolType = UNKNOWN);
   friend ostream &operator<<(ostream &out, SymbolTable const &st) {

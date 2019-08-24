@@ -16,6 +16,19 @@ void SymbolTable::addSymbol(string label, int value, SymbolType type) {
   table.push_front(node);
 }
 
+error_type SymbolTable::validLabel(string lbl) {
+  auto error = NO_ERROR;
+  if (lbl.length() > maxSymbolLength)
+    return LABEL_TOO_LONG;
+  if (INVALID_FIRST_CHAR(lbl.at(0)))
+    return INVALID_FIRST_CHARACTER;
+  for (auto ch : lbl) {
+    if (INVALID_CHAR(ch))
+      return INVALID_CHARACTER;
+  }
+  return error;
+}
+
 /*
 SymbolTable::~SymbolTable() {
   while (head != nullptr) {

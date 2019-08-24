@@ -1,31 +1,8 @@
 #pragma once
+#include "definitions.hpp"
 #include <iomanip>
-#include <string>
 
 using namespace std;
-
-#ifndef SYMBOL_TYPE
-#define SYMBOL_TYPE
-
-enum SymbolType {
-  UNKNOWN,
-  LABEL,
-  REGISTER
-};
-
-const string symbolTypeToString[] = {
-    "UNKNOWN",
-    "LABEL",
-    "REGISTER"};
-
-#endif
-
-#ifndef SYMBOL_CONSTANTS
-#define SYMBOL_CONSTANTS
-
-const auto maxSymbolLength = 32U;
-const auto maxTypeLength = symbolTypeToString[REGISTER].length();
-#endif
 
 #ifndef SYMBOL
 #define SYMBOL
