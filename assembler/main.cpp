@@ -4,6 +4,7 @@ using namespace std;
 
 int main() {
   cout << "Hi" << endl;
-  SymbolTable s;
+  SymbolTable table;
+  cout << table << endl;
   return 0;
 }

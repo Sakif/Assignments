@@ -2,29 +2,9 @@
 
 using namespace std;
 
-Symbol::Symbol(string l, SymbolType t, int v, Symbol *nn) : label(l), type(t), value(v), nextSymbol(nn) {}
+Symbol::Symbol(string l, SymbolType t, int v) : label(l), type(t), value(v) {}
 
-int Symbol::getValue() const {
-  return value;
-}
-
-bool Symbol::inUnknown() const {
-  return type == UNKNOWN;
-}
-
-void Symbol::update(int v, SymbolType t) {
-  value = v;
+void Symbol::update(SymbolType t, int v) {
   type = t;
-}
-
-string Symbol::getLabel() const {
-  return label;
-}
-
-string Symbol::printType() const {
-  return symbolTypeToString[type];
-}
-
-Symbol *Symbol::next() const {
-  return nextSymbol;
+  value = v;
 }

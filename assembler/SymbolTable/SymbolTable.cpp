@@ -1,6 +1,6 @@
 #include "SymbolTable.hpp"
 
-SymbolTable::SymbolTable() : head(nullptr) {
+SymbolTable::SymbolTable() {
   addSymbol("R0", 0, REGISTER);
   addSymbol("R1", 1, REGISTER);
   addSymbol("R2", 2, REGISTER);
@@ -12,8 +12,8 @@ SymbolTable::SymbolTable() : head(nullptr) {
 }
 
 void SymbolTable::addSymbol(string label, int value, SymbolType type) {
-  auto node = new Symbol(label, type, value, head);
-  head = node;
+  auto node = new Symbol(label, type, value);
+  table.push_front(node);
 }
 
 /*
