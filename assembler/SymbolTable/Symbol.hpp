@@ -8,22 +8,29 @@ using namespace std;
 #define SYMBOL
 
 class Symbol {
-public:
+private:
   string label;
   SymbolType type;
   int value;
+
+public:
   Symbol(string, SymbolType, int = 0);
   void update(SymbolType, int);
 
+  string getLabel() const;
+  string printType() const;
+  SymbolType getType() const;
+  int getValue() const;
+
   friend ostream &operator<<(ostream &out, Symbol const &s) {
     /* label */
-    out << left << setw(maxSymbolLength) << s.label << " | ";
+    out << left << setw(maxSymbolLength) << s.getLabel() << " | ";
     /* type */
-    out << setw(maxTypeLength) << symbolTypeToString[s.type] << " | ";
+    out << setw(maxTypeLength) << s.printType() << " | ";
     /* hex value */
-    out << "0x" << hex << right << setfill('0') << setw(4) << s.value << " | ";
+    out << "0x" << hex << right << setfill('0') << setw(4) << s.getValue() << " | ";
     /* decimal value */
-    out << dec << s.value << setfill(' ');
+    out << dec << s.getValue() << setfill(' ');
     return out;
   }
 };

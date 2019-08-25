@@ -30,7 +30,8 @@ enum error_type {
   NO_ERROR,
   LABEL_TOO_LONG,
   INVALID_FIRST_CHARACTER,
-  INVALID_CHARACTER
+  INVALID_CHARACTER,
+  DUPLICATE_LABEL
 };
 
 #define INVALID_FIRST_CHAR(ch) (!isalpha(ch) && !(ch == '_'))
@@ -40,5 +41,6 @@ const std::string errorToString[] = {
     "No error",
     "The length of the label is greater than maximum allowed length",
     "Label must start with _ or alphabetic character",
-    "Label can only contain _ or other alphanumeric character"};
+    "Label can only contain _ or alphanumeric characters",
+    "Duplicate Label"};
 #endif

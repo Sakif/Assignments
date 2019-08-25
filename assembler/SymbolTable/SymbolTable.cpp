@@ -29,6 +29,14 @@ error_type SymbolTable::validLabel(string lbl) {
   return error;
 }
 
+Symbol *SymbolTable::find(string lbl) {
+  for (auto node : table) {
+    if (node->getLabel() == lbl)
+      return node;
+  }
+  return nullptr;
+}
+
 /*
 SymbolTable::~SymbolTable() {
   while (head != nullptr) {

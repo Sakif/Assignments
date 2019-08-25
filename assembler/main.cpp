@@ -31,5 +31,8 @@ int main() {
   error = table.validLabel(lbl);
   if (error != NO_ERROR)
     cout << lbl << errorToString[error] << endl;
+
+  auto n = table.find("R5");
+  cout << n->printType() << endl;
   return 0;
 }

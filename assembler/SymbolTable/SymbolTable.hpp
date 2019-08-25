@@ -16,8 +16,10 @@ public:
   SymbolTable();
   /* ~SymbolTable(); */
   static error_type validLabel(string);
+  Symbol *find(string);
 
   void addSymbol(string, int, SymbolType = UNKNOWN);
+
   friend ostream &operator<<(ostream &out, SymbolTable const &st) {
     out << endl;
     out << setw(80) << setfill('#') << "#" << setfill(' ') << endl;
