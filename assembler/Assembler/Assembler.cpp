@@ -1,4 +1,5 @@
 #include "Assembler.hpp"
+#include <regex>
 
 using namespace std;
 
@@ -17,5 +18,19 @@ Assembler::Assembler(string asmFileName) {
 Assembler::~Assembler() {
   asmFile.close();
   lisFile.close();
-  /* cout << "Closed files" << endl; //*/
+}
+
+list<string> Assembler::tokenize(string line, bool removeComment, string delim) {
+  if (removeComment)
+    line = line.substr(0, line.find_first_of(";"));
+  regex rx(delim);
+  list<string> tokens;
+  sregex_token_iterator itr(line.begin(), line.end(), rx, -1);
+  sregex_token_iterator end;
+  while (itr != end) {
+    if (itr->length() > 0)
+      tokens.push_back(*itr);
+    itr++;
+  }
+  return tokens;
 }

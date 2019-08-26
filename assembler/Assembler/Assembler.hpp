@@ -18,7 +18,7 @@ public:
   Assembler(string);
   ~Assembler();
 
-  static list<string> tokenize(string);
+  static list<string> tokenize(string,bool=true,string="\\s+");
 };
 
 #endif
