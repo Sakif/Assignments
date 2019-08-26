@@ -43,4 +43,5 @@ const std::string errorToString[] = {
     "Label must start with _ or alphabetic character",
     "Label can only contain _ or alphanumeric characters",
     "Duplicate Label"};
+
 #endif
