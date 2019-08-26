@@ -17,6 +17,8 @@ private:
 public:
   Assembler(string);
   ~Assembler();
+
+  static list<string> tokenize(string);
 };
 
 #endif
