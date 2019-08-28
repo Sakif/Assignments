@@ -16,7 +16,7 @@ void SymbolTable::addSymbol(string label, int value, SymbolType type) {
   table.push_front(node);
 }
 
-error_type SymbolTable::validLabel(string lbl) {
+ErrorType SymbolTable::validLabel(string lbl) {
   auto error = NO_ERROR;
   if (lbl.length() > maxSymbolLength)
     return LABEL_TOO_LONG;

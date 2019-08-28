@@ -12,3 +12,4 @@ cmake/
 assembler/build/
 #*#
 .#*
+assembler/.vscode/

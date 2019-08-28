@@ -23,19 +23,19 @@ const auto maxSymbolLength = 32U;
 const auto maxTypeLength = symbolTypeToString[REGISTER].length();
 #endif
 
+#define INVALID_FIRST_CHAR(ch) (!isalpha(ch) && !(ch == '_'))
+#define INVALID_CHAR(ch) (!isalnum(ch) && !(ch == '_'))
+
 #ifndef ERROR_TYPES
 #define ERROR_TYPES
 
-enum error_type {
+enum ErrorType {
   NO_ERROR,
   LABEL_TOO_LONG,
   INVALID_FIRST_CHARACTER,
   INVALID_CHARACTER,
-  DUPLICATE_LABEL
+  INVALID_CONSTANT
 };
-
-#define INVALID_FIRST_CHAR(ch) (!isalpha(ch) && !(ch == '_'))
-#define INVALID_CHAR(ch) (!isalnum(ch) && !(ch == '_'))
 
 const std::string errorToString[] = {
     "No error",

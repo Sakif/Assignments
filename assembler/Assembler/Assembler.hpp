@@ -15,10 +15,11 @@ private:
   SymbolTable symbol_table;
 
 public:
-  Assembler(string);
+  Assembler(string fileName);
   ~Assembler();
 
-  static list<string> tokenize(string,bool=true,string="\\s+");
+  static list<string> tokenize(string line, bool removeComment = true, string delim = "\\s+");
+  static ErrorType constantToInteger(string, int &);
 };
 
 #endif

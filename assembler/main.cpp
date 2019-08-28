@@ -4,7 +4,7 @@ using namespace std;
 
 void testTokens(string l) {
   cout << "In: " << l << endl;
-  auto tokens = Assembler::tokenize(l);
+  auto tokens = Assembler::tokenize(l, false, ",");
   cout << "Out: ";
   for (auto t : tokens)
     cout << t << " ";
@@ -13,11 +13,11 @@ void testTokens(string l) {
 
 int main(/*int const argc, char const *argv[]*/) {
   testTokens("s");
-  testTokens("    ld	R0,#1	");
-  testTokens("ldr R5,#-60,r0 ;cart");
-  testTokens("	SIZE equ $26;fish");
-  testTokens("CAP_A equ 'A'; dog");
-  testTokens("  org #80 ; mouse");
+  testTokens("R0,#1");
+  testTokens("R5,#-60,r0");
+  testTokens("$26");
+  testTokens(" 'A'");
+  testTokens("#80");
 
   return 0;
 }

@@ -15,7 +15,7 @@ private:
 public:
   SymbolTable();
   /* ~SymbolTable(); */
-  static error_type validLabel(string);
+  static ErrorType validLabel(string);
   Symbol *find(string);
 
   void addSymbol(string, int, SymbolType = UNKNOWN);
