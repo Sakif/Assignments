@@ -48,7 +48,7 @@ ErrorType Assembler::constantToInteger(string token, int &value) {
     return NO_ERROR;
     break;
   default:
-    return INVALID_CONSTANT;
+    return INVALID_CONSTANT_START;
     break;
   }
 }

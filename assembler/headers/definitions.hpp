@@ -34,7 +34,7 @@ enum ErrorType {
   LABEL_TOO_LONG,
   INVALID_FIRST_CHARACTER,
   INVALID_CHARACTER,
-  INVALID_CONSTANT
+  INVALID_CONSTANT_START
 };
 
 const std::string errorToString[] = {
@@ -42,6 +42,6 @@ const std::string errorToString[] = {
     "The length of the label is greater than maximum allowed length",
     "Label must start with _ or alphabetic character",
     "Label can only contain _ or alphanumeric characters",
-    "Duplicate Label"};
+    "The constant provided does not start with #, $ nor '"};
 
 #endif
