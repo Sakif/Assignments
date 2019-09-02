@@ -11,13 +11,10 @@ void testTokens(string l) {
   cout << endl;
 }
 
-int main(/*int const argc, char const *argv[]*/) {
-  testTokens("s");
-  testTokens("R0,#1");
-  testTokens("R5,#-60,r0");
-  testTokens("$26");
-  testTokens(" 'A'");
-  testTokens("#80");
-
+int main(int const argc, char const *argv[]) {
+  if (argc < 2)
+    cout << "Please provide a file to assemble" << endl;
+  else
+    Assembler a(argv[1]);
   return 0;
 }

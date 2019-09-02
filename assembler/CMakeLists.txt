@@ -7,3 +7,4 @@ set(CMAKE_CXX_FLAGS "-O3 -Wall -Wextra -Werror")
 include_directories(headers SymbolTable Assembler)
 
 add_executable(assembler main.cpp SymbolTable/Symbol.cpp SymbolTable/SymbolTable.cpp Assembler/Assembler.cpp)
+add_executable(test testfile.cpp SymbolTable/Symbol.cpp SymbolTable/SymbolTable.cpp Assembler/Assembler.cpp)
