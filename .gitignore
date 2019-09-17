@@ -9,7 +9,7 @@ compile_commands.json
 CTestTestfile.cmake
 cmake/
 *.pdf
-assembler/build/
+*/build/
 #*#
 .#*
 */.vscode/
