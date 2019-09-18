@@ -161,3 +161,6 @@ print(f"mmf2: {mmf2} A")
 
 mmf = mmf1 + mmf2
 print(f"mmf: {mmf} A")
+
+flux = mmf / reluctance
+print(f"flux: {flux:.3e} Wb")
