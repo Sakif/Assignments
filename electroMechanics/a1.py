@@ -115,3 +115,49 @@ print(f"flux: {flux:.3e} Wb")
 
 lbl = " A1Q7 "
 print(f"\n{lbl:#^80}")
+rPermability = 10000
+thickness = 2e-2  # m
+turns = 400
+current1 = 1.0  # A
+current2 = 1.2  # A
+H = 2e-2  # m
+V = 3e-2  # m
+gapLength = 0.2e-2  # m
+height = 10e-2  # m
+width = 14e-2  # m
+
+areaH = thickness * H
+print(f"area left,right: {areaH:.3e} m^2")
+
+areaV = thickness * V
+print(f"area up,down: {areaV:.3e} m^2")
+
+lengthH = (width - V) * 2 - gapLength
+print(f"left,right length: {lengthH:.4} m")
+
+lengthV = (height - H) * 2
+print(f"up,down length: {lengthV:.4} m")
+
+reluctanceH = lengthH
+reluctanceH /= rPermability * const.mu_0 * areaH
+print(f"reluctance left,right: {reluctanceH:.4} H^-1")
+
+reluctanceV = lengthV
+reluctanceV /= rPermability * const.mu_0 * areaV
+print(f"reluctance up,down: {reluctanceV:.4} H^-1")
+
+reluctanceGap = gapLength
+reluctanceGap /= const.mu_0 * areaH
+print(f"gap reluctance: {reluctanceGap:.4} H^-1")
+
+reluctance = reluctanceH + reluctanceV + reluctanceGap
+print(f"reluctance: {reluctance:.4} H^-1")
+
+mmf1 = turns * current1
+print(f"mmf1: {mmf1} A")
+
+mmf2 = turns * current2
+print(f"mmf2: {mmf2} A")
+
+mmf = mmf1 + mmf2
+print(f"mmf: {mmf} A")
