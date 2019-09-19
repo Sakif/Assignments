@@ -9,11 +9,10 @@ unsigned long fib(unsigned n) {
 }
 
 int main() {
-  auto n = 20U;
+  auto n = 30U;
   cout << "N = " << n << endl;
   cout << "Fibonacci: ";
   for (auto i = 0U; i < n; i++)
-    cout << fib(i) << ", ";
-  cout << endl;
+    cout << fib(i) << endl;
   return 0;
 }
