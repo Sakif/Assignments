@@ -27,7 +27,7 @@ int main() {
   primeFactors(n);
   n = 20;
   primeFactors(n);
-  n=72;
+  n = 72;
   primeFactors(n);
   return 0;
 }
