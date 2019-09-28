@@ -1,7 +1,8 @@
-import os
 from scipy.constants import mu_0
+import numpy as np
+from os import system
 
-os.system("clear")
+system("clear")
 
 lbl = " A2Q1 "
 print(f"{lbl:#^80}")
@@ -27,35 +28,57 @@ statorYokeMeanDiameter = 42e-2  # m
 statorYokeCrossSection = 14e-2 * 6e-2  # m
 airGapLength = 1.5e-3  # m
 
+system("clear")
 lbl = " A2Q6 "
 print(f"{lbl:#^80}")
 mmf1 = 4000  # A
 mmf2 = mmf1
 mu_r = 2000
-lengthGap = 2e-3  # m
+lGap = 2e-3  # m
 
-mainArea = 20e-3 * 20e-3  # m^2
-print(f"main area: {mainArea:.3e} m^2")
+lLeft = 40 + 20 + 20 + 35 * 2 + 10
+lLeft *= 1e-3
+print(f"Length left: {lLeft:.4} m")
 
-lengthMain = 20 + 35 + 10 + 65  # horizontal mm
-lengthMain += 40 + 20  # vertical mm
-lengthMain *= 2 * 1e-3  # convert to m and account for top,bottom left,right
-print(f"length of main part: {lengthMain} m")
+lRight = 10 + 65 * 2 + 20 + 20 + 40
+lRight *= 1e-3
+print(f"Length right: {lRight:.4} m")
 
-areaRib = 10e-3 * 20e-3  # m^2
-print(f"rib area: {areaRib:.3e} m^2")
+lMiddle = 40 + 20 - lGap * 1e3
+lMiddle *= 1e-3
+print(f"Length middle: {lMiddle:.4} m")
 
-lengthRib = 40e-3 + 20e-3 - lengthGap  # m
-print(f"rib length: {lengthRib:.3e} m")
+aOuter = 20e-3 * 20e-3
+print(f"Area outer: {aOuter:.4} m^2")
 
-reluctanceMain = lengthMain
-reluctanceMain /= mu_r * mu_0 * mainArea
-print(f"reluctance main: {reluctanceMain:.4} H^-1")
+aMiddle = 20e-3 * 10e-3
+print(f"Area middle: {aMiddle:.4} m^2")
 
-reluctanceRib = lengthRib
-reluctanceRib /= mu_r * mu_0 * areaRib
-print(f"reluctance rib: {reluctanceRib:.4} H^-1")
+rLeft = lLeft
+rLeft /= mu_r * mu_0 * aOuter
+print(f"Reluctance left: {rLeft:.4} H^-1")
 
-reluctanceGap = lengthGap
-reluctanceGap /= mu_0 * areaRib
-print(f"reluctance gap: {reluctanceGap:.4} H^-1")
+rRight = lRight
+rRight /= mu_r * mu_0 * aOuter
+print(f"Reluctance right: {rRight:.4} H^-1")
+
+rMiddle = lMiddle
+rMiddle /= mu_r * mu_0 * aMiddle
+print(f"Reluctance middle: {rMiddle:.4} H^-1")
+
+rGap = lGap
+rGap /= mu_0 * aMiddle
+print(f"Reluctance gap: {rGap:.4} H^-1")
+
+reluctance = np.array([[rLeft + rGap + rMiddle, -rGap - rMiddle],
+                       [-rGap - rMiddle, rRight + rGap + rMiddle]])
+print("Reluctance:")
+for i in reluctance:
+    print(f"[{i[0]:.4}, {i[1]:.4}]")
+mmf = np.array([mmf1, mmf2])
+flux = np.linalg.solve(reluctance, mmf)
+print(f"flux 1: {flux[0]:.4} Wb")
+print(f"flux 2: {flux[1]:.4} Wb")
+
+fluxGap = flux[0] - flux[1]
+print(f"Flus in gap: {fluxGap:.4} Wb")
