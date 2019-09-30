@@ -2,8 +2,6 @@ from scipy.constants import mu_0
 import numpy as np
 from os import system
 
-system("clear")
-
 lbl = " A2Q1 "
 print(f"{lbl:#^80}")
 
@@ -28,7 +26,6 @@ statorYokeMeanDiameter = 42e-2  # m
 statorYokeCrossSection = 14e-2 * 6e-2  # m
 airGapLength = 1.5e-3  # m
 
-system("clear")
 lbl = " A2Q6 "
 print(f"{lbl:#^80}")
 mmf1 = 4000  # A
@@ -82,3 +79,23 @@ print(f"flux 2: {flux[1]:.4} Wb")
 
 fluxGap = flux[0] - flux[1]
 print(f"Flus in gap: {fluxGap:.4} Wb")
+
+system("clear")
+lbl = " A2Q4 "
+print(f"{lbl:#^80}")
+area = 60e-3 * 50e-3
+print(f"area: {area:.4} m^2")
+
+lGapLeft = 2e-3
+lGapRight = 1e-3
+lMiddle = 100 + 100 + 2 - 60
+lMiddle *= 1e-3
+print(f"length middle: {lMiddle:.4} m")
+
+rGapLeft = lGapLeft
+rGapLeft /= mu_0 * area
+print(f"reluctance left gap: {rGapLeft:.4} H^-1")
+
+rGapRight = lGapRight
+rGapRight /= mu_0 * area
+print(f"reluctance right gap: {rGapRight:.4} H^-1")
