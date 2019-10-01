@@ -69,9 +69,11 @@ print(f"Reluctance gap: {rGap:.4} H^-1")
 
 reluctance = np.array([[rLeft + rGap + rMiddle, -rGap - rMiddle],
                        [-rGap - rMiddle, rRight + rGap + rMiddle]])
+
 print("Reluctance:")
 for i in reluctance:
     print(f"[{i[0]:.4}, {i[1]:.4}]")
+
 mmf = np.array([mmf1, mmf2])
 flux = np.linalg.solve(reluctance, mmf)
 print(f"flux 1: {flux[0]:.4} Wb")
@@ -82,6 +84,8 @@ print(f"Flus in gap: {fluxGap:.4} Wb")
 
 system("clear")
 lbl = " A2Q4 "
+mu_r = 2500
+
 print(f"{lbl:#^80}")
 area = 60e-3 * 50e-3
 print(f"area: {area:.4} m^2")
@@ -99,3 +103,34 @@ print(f"reluctance left gap: {rGapLeft:.4} H^-1")
 rGapRight = lGapRight
 rGapRight /= mu_0 * area
 print(f"reluctance right gap: {rGapRight:.4} H^-1")
+
+rMiddle = lMiddle
+rMiddle /= mu_r * mu_0 * area
+print(f"reluctance middle: {rMiddle:.4} H^-1")
+
+lLeft = 2 * (60 + 60) + 100 + 100 - 60
+lLeft *= 1e-3
+print(f"length left: {lLeft:.4} m")
+
+lRight = lLeft + 1e-3
+print(f"length right: {lRight:.4} m")
+
+rLeft = lLeft
+rLeft /= mu_r * mu_0 * area
+print(f"reluctance left: {rLeft:.4} H^-1")
+
+rRight = lRight
+rRight /= mu_r * mu_0 * area
+print(f"reluctance right: {rRight:.4} H^-1")
+
+reluctance = np.array([[rLeft + rGapLeft + rMiddle, -rMiddle],
+                       [-rMiddle, rMiddle + rRight + rGapRight]])
+
+print("reluctance matrix:")
+for i in reluctance:
+    print(f"[{i[0]:.4}, {i[1]:.4}]")
+
+mmf = np.array([800, -800])
+flux = np.linalg.solve(reluctance, mmf)
+print(f"flux 1: {flux[0]:.4} Wb")
+print(f"flux 2: {flux[1]:.4} Wb")
