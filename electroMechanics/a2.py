@@ -3,20 +3,7 @@ import numpy as np
 from os import system
 from util import parallelImpedance
 
-lbl = " A2Q1 "
-print(f"{lbl:#^80}")
-
-flux = 50e-6  # Wb
-area = 1e-2 * 1e-2  # m^2
-lengthC = (8e-2 - 0.5e-2) * 2 + 4e-2 - 1e-2  # m
-print(f"length of C: {lengthC:.4} m")
-lengthI = 4e-2
-lengthGap = 0.5e-3
-fluxDensity = flux / area
-print(f"flux density: {fluxDensity:.4} T")
-fieldIntensity = 350  # H
-
-lbl = " A2Q1 "
+lbl = " A2Q2 "
 print(f"{lbl:#^80}")
 rotorDiameter = 18e-2  # m
 rotorAxialLength = 10e-2  # m
@@ -83,7 +70,6 @@ print(f"flux 2: {flux[1]:.4} Wb")
 fluxGap = flux[0] - flux[1]
 print(f"Flus in gap: {fluxGap:.4} Wb")
 
-system("clear")
 lbl = " A2Q4 "
 print(f"{lbl:#^80}")
 mu_r = 2500
@@ -134,3 +120,34 @@ flux = rRight + rGapRight
 flux /= rRight + rGapRight + rLeft + rGapLeft
 flux *= phi
 print(f"flux right: {flux:.4} Wb")
+
+lbl = " A2Q1 "
+print(f"{lbl:#^80}")
+flux = 50e-6  # Wb
+lengthI = 4e-2  # m
+lengthGap = 0.5e-3  # m
+
+area = 1e-2 * 1e-2  # m^2
+print(f"area: {area} m^2")
+
+lengthC = (8 - 0.5) * 2 + 4 - 1
+lengthC *= 1e-2  # m
+print(f"length of C: {lengthC:.4} m")
+
+fluxDensity = flux / area
+print(f"flux density: {fluxDensity:.4} T")
+
+fieldIntensity = 350  # H
+mmf = fieldIntensity
+mmf *= lengthC + lengthI
+print(f"mmf: {mmf:.4} A")
+
+system("clear")
+lbl = " A2Q1 "
+print(f"{lbl:#^80}")
+fluxDensityI = 0.6  # T
+fluxDensityS = 1  # T
+mmf = 410  # A
+flux = 0.35e-3  # Wb
+mu_i = 4e-4
+mu_s = 4.348e-4
