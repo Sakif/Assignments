@@ -13,3 +13,4 @@ cmake/
 #*#
 .#*
 */.vscode/
+*/__pycache__/

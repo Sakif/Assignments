@@ -1,6 +1,13 @@
 import numpy as np
 
 
+def parallelImpedance(impedance):
+    zEq = 0
+    for z in impedance:
+        zEq += 1 / z
+    return 1 / zEq
+
+
 def phaserString(z):
     mag = np.abs(z)
     phase = np.angle(z, deg=True)

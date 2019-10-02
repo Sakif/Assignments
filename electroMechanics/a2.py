@@ -1,6 +1,7 @@
 from scipy.constants import mu_0
 import numpy as np
 from os import system
+from util import parallelImpedance
 
 lbl = " A2Q1 "
 print(f"{lbl:#^80}")
@@ -84,9 +85,9 @@ print(f"Flus in gap: {fluxGap:.4} Wb")
 
 system("clear")
 lbl = " A2Q4 "
-mu_r = 2500
-
 print(f"{lbl:#^80}")
+mu_r = 2500
+mmf = 800
 area = 60e-3 * 50e-3
 print(f"area: {area:.4} m^2")
 
@@ -123,14 +124,13 @@ rRight = lRight
 rRight /= mu_r * mu_0 * area
 print(f"reluctance right: {rRight:.4} H^-1")
 
-reluctance = np.array([[rLeft + rGapLeft + rMiddle, -rMiddle],
-                       [-rMiddle, rMiddle + rRight + rGapRight]])
+rEq = parallelImpedance([rGapLeft + rLeft, rGapRight + rRight])
+print(f"reluctance equivalent: {rEq:.4} H^-1")
 
-print("reluctance matrix:")
-for i in reluctance:
-    print(f"[{i[0]:.4}, {i[1]:.4}]")
-
-mmf = np.array([800, -800])
-flux = np.linalg.solve(reluctance, mmf)
-print(f"flux 1: {flux[0]:.4} Wb")
-print(f"flux 2: {flux[1]:.4} Wb")
+phi = mmf
+phi /= rEq + rMiddle
+print(f"phi: {phi:.4} Wb")
+flux = rRight + rGapRight
+flux /= rRight + rGapRight + rLeft + rGapLeft
+flux *= phi
+print(f"flux right: {flux:.4} Wb")
