@@ -143,11 +143,35 @@ mmf *= lengthC + lengthI
 print(f"mmf: {mmf:.4} A")
 
 system("clear")
-lbl = " A2Q1 "
+lbl = " A2Q3 "
 print(f"{lbl:#^80}")
 fluxDensityI = 0.6  # T
 fluxDensityS = 1  # T
 mmf = 410  # A
 flux = 0.35e-3  # Wb
 mu_i = 4e-4
-mu_s = 4.348e-4
+mu_s = 4.348e-3
+reluctance = mmf / flux
+print(f"reluctance: {reluctance:.4} H^-1")
+
+width1 = flux / fluxDensityI
+print(f"width1: {width1:.3e}")
+
+width2 = flux / fluxDensityS
+print(f"width2: {width2:.3e}")
+
+t = []
+t.append(8 * 3)
+t[0] /= mu_i * width1
+
+t.append(2 / mu_i)
+
+t.append(8)
+t[-1] /= mu_s * width2
+
+t.append(width1)
+t[-1] /= mu_s * width2
+
+roots = [t[1] + t[-1], t[0] + t[2] - reluctance]
+d = roots[0] / -roots[1]
+print(f"d: {d:.4} m")
