@@ -3,17 +3,6 @@ import numpy as np
 from os import system
 from util import parallelImpedance
 
-lbl = " A2Q2 "
-print(f"{lbl:#^80}")
-rotorDiameter = 18e-2  # m
-rotorAxialLength = 10e-2  # m
-poleAxialLength = 10e-2  # m
-poleCircumferentialWidth = 8.5e-2  # m
-poleHeight = 9e-2  # m
-statorYokeMeanDiameter = 42e-2  # m
-statorYokeCrossSection = 14e-2 * 6e-2  # m
-airGapLength = 1.5e-3  # m
-
 lbl = " A2Q6 "
 print(f"{lbl:#^80}")
 mmf1 = 4000  # A
@@ -115,11 +104,11 @@ print(f"reluctance equivalent: {rEq:.4} H^-1")
 
 phi = mmf
 phi /= rEq + rMiddle
-print(f"phi: {phi:.4} Wb")
-flux = rRight + rGapRight
+print(f"phi: {phi:.3e} Wb")
+flux = rLeft + rGapLeft
 flux /= rRight + rGapRight + rLeft + rGapLeft
 flux *= phi
-print(f"flux right: {flux:.4} Wb")
+print(f"flux right: {flux:.3e} Wb")
 
 lbl = " A2Q1 "
 print(f"{lbl:#^80}")
@@ -142,7 +131,6 @@ mmf = fieldIntensity
 mmf *= lengthC + lengthI
 print(f"mmf: {mmf:.4} A")
 
-system("clear")
 lbl = " A2Q3 "
 print(f"{lbl:#^80}")
 fluxDensityI = 0.6  # T
@@ -175,3 +163,83 @@ t[-1] /= mu_s * width2
 roots = [t[1] + t[-1], t[0] + t[2] - reluctance]
 d = roots[0] / -roots[1]
 print(f"d: {d:.4} m")
+
+lbl = " A2Q2 "
+print(f"{lbl:#^80}")
+rotorDiameter = 18e-2  # m
+rotorAxialLength = 10e-2  # m
+poleAxialLength = 10e-2  # m
+poleCircumferentialWidth = 8.5e-2  # m
+poleHeight = 9e-2  # m
+statorYokeMeanDiameter = 42e-2  # m
+statorYokeCrossSection = 14e-2 * 6e-2  # m
+airGapLength = 1.5e-3  # m
+mu_cast = 1500
+mu_sheet = 3800
+
+rotorArea = rotorDiameter * rotorAxialLength
+poleArea = poleCircumferentialWidth * poleAxialLength
+
+statorReluctance = statorYokeMeanDiameter * np.pi / 4
+statorReluctance /= mu_0 * mu_cast * statorYokeCrossSection
+print(f"stator reluctance: {statorReluctance:.4} H^-1")
+
+rotorReluctance = rotorDiameter
+rotorReluctance /= mu_0 * mu_sheet * (np.pi / 4) * rotorArea
+print(f"rotor reluctance: {rotorReluctance:.4} H^-1")
+
+gapReluctance = airGapLength
+gapReluctance /= mu_0 * poleArea
+print(f"gap reluctance: {gapReluctance:.4} H^-1")
+
+poleReluctance = poleHeight
+poleReluctance /= mu_0 * mu_sheet * poleArea
+print(f"pole reluctance: {poleReluctance:.4} H^-1")
+
+flux = 0.9 * poleArea
+print(f"flux: {flux:.4} Wb")
+
+mmf = poleReluctance + gapReluctance
+mmf += rotorReluctance / 4
+mmf += statorReluctance / 4
+mmf *= flux
+print(f"mmf: {mmf:.6} A")
+
+system("clear")
+lbl = " A2Q5 "
+print(f"{lbl:#^80}")
+mu_rotor, mu_stator = 3500, 1800
+dOut, dIn = 1, 0.72
+rLenght = .7
+rWidth = .1
+gapLength = 1e-2
+axiallength = 1
+mmf = 10e3
+
+gapArea = rWidth * axiallength
+statorArea = (dOut - dIn) * axiallength
+
+gapReluctance = gapLength
+gapReluctance /= mu_0 * gapArea
+print(f"gap reluctance: {gapReluctance:.4} H^-1")
+
+meanStatorLength = (dOut + dIn) / 2
+meanStatorLength *= np.pi
+
+statorReluctance = meanStatorLength
+statorReluctance /= mu_stator * mu_0 * statorArea
+print(f"stator reluctance: {statorReluctance:.4} H^-1")
+
+rotorReluctance = rLenght
+rotorReluctance /= mu_rotor * mu_0 * gapArea
+print(f"rotor reluctance: {rotorReluctance:.4} H^-1")
+
+reluctance = 2 * gapReluctance + rotorReluctance
+reluctance += statorReluctance / 2
+print(f"reluctance {reluctance:.4} H^-1")
+
+flux = mmf / reluctance
+print(f"flux: {flux:.4} Wb")
+
+fluxDensity = flux / gapArea
+print(f"B gap: {fluxDensity:.4} T")
