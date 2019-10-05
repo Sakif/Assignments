@@ -53,7 +53,7 @@
 
 (use-package doom-modeline
   :init
-  (setq doom-modeline-icon (display-graphic-p))
+  (setq doom-modeline-icon (display-graphic-p));(display-graphic-p)
   (setq doom-modeline-major-mode-icon t)
   (setq doom-modeline-buffer-state-icon t)
   (setq doom-modeline-buffer-file-name-style 'file-name)
@@ -88,10 +88,14 @@
     (("gnu" . "http://elpa.gnu.org/packages/")
      ("melpa" . "http://stable.melpa.org/packages/"))))
  '(package-enable-at-startup t)
- '(package-selected-packages
-   (quote
-    (flycheck-irony use-package company-irony)))
+ '(package-selected-packages (quote (flycheck-irony use-package company-irony)))
  '(scroll-all-mode nil)
  '(show-paren-mode t))
 
 ;;; init.el ends here
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
