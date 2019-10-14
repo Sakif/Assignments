@@ -1,31 +1,34 @@
 
 ;;; Code:
+(require 'package)
+(add-to-list 'package-archives
+             '("MELPA" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
-(use-package elpy
-  :init
-  (setq python-shell-interpreter "python3")
-  (setq elpy-rpc-python-command "python3")
-  :config
-  (elpy-enable)
-  :hook (before-save . elpy-format-code))
+; base config
+(global-visual-line-mode)
+(show-paren-mode)
+(column-number-mode)
+
+(custom-set-variables ; custom-set-variables was added by Custom. If you edit it by hand, you could mess it up, so be careful. Your init file should contain only one such instance. If there is more than one, they won't work right.
+ '(cua-mode t nil (cua-base))
+ '(package-enable-at-startup t)
+ '(make-backup-files nil)
+ '(inhibit-splash-screen t)
+ '(menu-bar-mode (display-graphic-p))
+ '(package-selected-packages
+   (quote
+    (auto-package-update doom-themes doom-modeline helm-projectile elpy company-irony use-package flycheck-irony))))
+
+(custom-set-faces ; custom-set-faces was added by Custom. If you edit it by hand, you could mess it up, so be careful. Your init file should contain only one such instance. If there is more than one, they won't work right.
+ )
 
 (use-package company
-  :config
-  (global-company-mode t)
+  :config (global-company-mode)
   :bind ("M-/" . company-complete-common-or-cycle))
 
-(use-package irony
-  :hook
-  ((c++-mode . irony-mode)
-   (c-mode . irony-mode)
-   (irony-mode . irony-cdb-autosetup-compile-options))
-  :config
-  (eval-after-load 'flycheck '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
-
 (use-package flycheck
-  :config
-  (global-flycheck-mode t))
+  :config (global-flycheck-mode))
 
 (use-package helm-projectile
   :init
@@ -51,9 +54,23 @@
    ("M-y" . helm-show-kill-ring)
    ("C-x C-f" . helm-find-files)))
 
+(use-package elpy
+  :init
+  (setq python-shell-interpreter "python3")
+  (setq elpy-rpc-python-command "python3")
+  :config (elpy-enable)
+  :hook (before-save . elpy-format-code))
+
+(use-package irony
+  :hook
+  ((c++-mode . irony-mode)
+   (c-mode . irony-mode)
+   (irony-mode . irony-cdb-autosetup-compile-options))
+  :config (eval-after-load 'flycheck '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
+
 (use-package doom-modeline
   :init
-  (setq doom-modeline-icon (display-graphic-p));(display-graphic-p)
+  (setq doom-modeline-icon (display-graphic-p))
   (setq doom-modeline-major-mode-icon t)
   (setq doom-modeline-buffer-state-icon t)
   (setq doom-modeline-buffer-file-name-style 'file-name)
@@ -67,35 +84,7 @@
   (load-theme 'doom-one t))
 
 (use-package auto-package-update
-  :init
-  (setq auto-package-update-delete-old-versions t)
-  :config
-  (auto-package-update-maybe))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(cua-mode t nil (cua-base))
- '(global-visual-line-mode t)
- '(inhibit-startup-screen t)
- '(make-backup-files nil)
- '(menu-bar-mode nil)
- '(package-archives
-   (quote
-    (("gnu" . "http://elpa.gnu.org/packages/")
-     ("melpa" . "http://stable.melpa.org/packages/"))))
- '(package-enable-at-startup t)
- '(package-selected-packages (quote (flycheck-irony use-package company-irony)))
- '(scroll-all-mode nil)
- '(show-paren-mode t))
+  :init (auto-package-update-maybe)
+  :config (setq auto-package-update-delete-old-versions t))
 
 ;;; init.el ends here
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
