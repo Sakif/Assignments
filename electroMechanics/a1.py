@@ -1,5 +1,6 @@
-import scipy.constants as const
 import os
+from scipy.constants import mu_0
+import numpy as np
 
 os.system("clear")
 
@@ -33,10 +34,22 @@ print(f"\n{lbl:#^80}")
 
 lbl = " a "
 print(f"{lbl:=^80}")
+B = [0.2, 0.6, 0.7]
+H = [500, 3000, 5000]
+mu = []
+for i in range(len(B)):
+    mu.append(B[i] / H[i])
+for m in mu:
+    print(f"mu: {m:.3e}")
+    mu_r = m / mu_0
+    print(f"mu_r: {mu_r:.4}\n")
+
+lbl = " a "
+print(f"{lbl:=^80}")
 fluxDensity = 0.6  # T
 length = 8e-3  # m
 mmf = fluxDensity * length
-mmf /= const.mu_0
+mmf /= mu_0
 print(f"mmf: {mmf:.4} ")
 
 lbl = " b "
@@ -54,7 +67,7 @@ print(f"α: {angularAcceleration:.4} rad s^-2")
 angularVelocity = angularAcceleration * t
 print(f"ω: {angularVelocity:.4} rad s^-1")
 angularVelocity *= 60  # s to min
-angularVelocity /= 2 * const.pi  # rad to rev
+angularVelocity /= 2 * np.pi  # rad to rev
 print(f"ω: {angularVelocity:.4} rpm")
 
 lbl = " A1Q5 "
@@ -67,10 +80,10 @@ rPermability = 1500
 
 lbl = " a "
 print(f"{lbl:=^80}")
-meanLength = 2 * const.pi * radius
+meanLength = 2 * np.pi * radius
 print(f"mean length: {meanLength:.4} m")
 reluctance = meanLength
-reluctance /= rPermability * const.mu_0 * area
+reluctance /= rPermability * mu_0 * area
 print(f"reluctance: {reluctance:.4} H^-1")
 
 lbl = " b "
@@ -102,7 +115,7 @@ print(f"area: {area:.4} m^2")
 meanLength = (innerL + width) * 4
 print(f"length: {meanLength:.4} m")
 reluctance = meanLength
-reluctance /= rPermability * const.mu_0 * area
+reluctance /= rPermability * mu_0 * area
 print(f"reluctance: {reluctance:.4} H^-1")
 mmf1 = current1 * turn1
 print(f"mmf1: {mmf1} A")
@@ -139,15 +152,15 @@ lengthV = (height - H) * 2
 print(f"up,down length: {lengthV:.4} m")
 
 reluctanceH = lengthH
-reluctanceH /= rPermability * const.mu_0 * areaH
+reluctanceH /= rPermability * mu_0 * areaH
 print(f"reluctance left,right: {reluctanceH:.4} H^-1")
 
 reluctanceV = lengthV
-reluctanceV /= rPermability * const.mu_0 * areaV
+reluctanceV /= rPermability * mu_0 * areaV
 print(f"reluctance up,down: {reluctanceV:.4} H^-1")
 
 reluctanceGap = gapLength
-reluctanceGap /= const.mu_0 * areaH
+reluctanceGap /= mu_0 * areaH
 print(f"gap reluctance: {reluctanceGap:.4} H^-1")
 
 reluctance = reluctanceH + reluctanceV + reluctanceGap
