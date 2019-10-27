@@ -77,3 +77,45 @@ An example of file is attached (TBD). Your task, read the file and count how man
 ## Task 3
 
 Create a program which performs prime number decomposition (as in lab 1), but uses a recursive function which calls itself, but with smaller parameter values.
+
+# Lab 3
+
+See Task 2, from Lab 2, the problem about student records.
+
+Write a problem which reads the student records file and outputs another file where the records are sorted alphabetically according to the student's last name. (can use strcmp function to compare strings)
+
+# Lab 4
+
+See Task 2, from Lab 2, the problem about student records.
+
+Write a problem which reads the student records file and outputs another file where the records are sorted alphabetically according to the student's last name. (can use strcmp function to compare strings)
+
+Perform the above task by creating a type Student class where the data are private fields, while we use methods to set data and get data.
+
+# Lab 5, formula parser
+
+This lab starts a series of labs where we will be working with parsing mathematical formulas. The symbolic formulas are parsed by compilers for the purpose of using them for computations. For example
+
+x+y+z
+
+Can be represented by a tree
+
++
+
+/ \
+
+x +
+
+/ \
+
+y z
+
+Once we substitute known values instead of the variables we use the tree to evaluate the formula.
+
+You need to use classes to create formula trees. An example of the base class is attached in the Formula file.
+
+You can see a class "adder" derived from formula which can add two formulas. You can use it to create a formula tree by parsing formulas that, for now, only consist of additions.
+
+z + x+ b
+
+Task: modify the adder class or create another class to perform subtractions.
