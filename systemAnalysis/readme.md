@@ -9,15 +9,15 @@ Create a program which takes a positive integer number N as an input. The progra
 
 For example:
 
-N=5
-
-Output: 1,1,2,3,5
+> N=5
+>
+> Output: 1,1,2,3,5
 
 --------------
 
-N=8
-
-Output: 1,1,2,3,5,8,13,21
+> N=8
+>
+> Output: 1,1,2,3,5,8,13,21
 
 ## Task 2
 
@@ -25,21 +25,21 @@ Create a program which takes a positive integer number N as an input. The progra
 
 For example:
 
-N=5
-
-Output: 5
-
---------------
-
-N=8
-
-Output: 2,2,2
+> N=5
+>
+> Output: 5
 
 --------------
 
-N=20
+> N=8
+>
+> Output: 2,2,2
 
-Output: 2,2,5
+--------------
+
+> N=20
+>
+> Output: 2,2,5
 
 Once most of the people complete a task a solution will be posted.
 
@@ -96,19 +96,19 @@ Perform the above task by creating a type Student class where the data are priva
 
 This lab starts a series of labs where we will be working with parsing mathematical formulas. The symbolic formulas are parsed by compilers for the purpose of using them for computations. For example
 
-x+y+z
+> x+y+z
 
 Can be represented by a tree
 
-+
-
-/ \
-
-x +
-
-/ \
-
-y z
+> +
+>
+> / \
+>
+> x +
+>
+> / \
+>
+> y z
 
 Once we substitute known values instead of the variables we use the tree to evaluate the formula.
 
@@ -116,6 +116,6 @@ You need to use classes to create formula trees. An example of the base class is
 
 You can see a class "adder" derived from formula which can add two formulas. You can use it to create a formula tree by parsing formulas that, for now, only consist of additions.
 
-z + x+ b
+> z + x+ b
 
 Task: modify the adder class or create another class to perform subtractions.
