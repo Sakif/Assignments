@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
@@ -13,6 +14,8 @@ struct studentRecord {
   unsigned ID;
   double gpa;
 };
+
+bool compareRecord(studentRecord lhs, studentRecord rhs) { return lhs.lastName < rhs.lastName; }
 
 studentRecord *readRecordFile(string fileName, unsigned &counter) {
   studentRecord *recordArray;
@@ -36,6 +39,20 @@ studentRecord *readRecordFile(string fileName, unsigned &counter) {
   return recordArray;
 }
 
+void printRecord(studentRecord *recordArray, unsigned counter, string fileName = "sortedRecords.txt") {
+  ofstream writer(fileName);
+  for (auto i = 0U; i < counter; i++) {
+    writer << recordArray[i].firstName << endl;
+    writer << recordArray[i].lastName << endl;
+    writer << recordArray[i].gpa << endl;
+    writer << recordArray[i].studyLevel << endl;
+    writer << recordArray[i].sex << endl;
+    writer << recordArray[i].ID << endl;
+    writer << endl;
+  }
+  writer.close();
+}
+
 int main() {
   auto femaleCount = 0U, underGradCount = 0U, arraySize = 0U;
   auto records = readRecordFile("student.txt", arraySize);
@@ -47,5 +64,8 @@ int main() {
   }
   cout << "There are " << femaleCount << " female students." << endl;
   cout << "There are " << underGradCount << " undergrad students." << endl;
+
+  sort(records, records + arraySize, compareRecord);
+  printRecord(records, arraySize);
   return 0;
 }
