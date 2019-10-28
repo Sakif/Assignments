@@ -1,6 +1,6 @@
 #pragma once
-#include "definitions.hpp"
 #include <iomanip>
+#include "definitions.hpp"
 
 using namespace std;
 
@@ -8,12 +8,12 @@ using namespace std;
 #define SYMBOL
 
 class Symbol {
-private:
+ private:
   string label;
   SymbolType type;
   int value;
 
-public:
+ public:
   Symbol(string, SymbolType, int = 0);
   void update(SymbolType, int);
 

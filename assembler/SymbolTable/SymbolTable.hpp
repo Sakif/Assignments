@@ -1,7 +1,7 @@
 #pragma once
-#include "Symbol.hpp"
 #include <iostream>
 #include <list>
+#include "Symbol.hpp"
 
 using namespace std;
 
@@ -9,10 +9,10 @@ using namespace std;
 #define SYMBOL_TABLE
 
 class SymbolTable {
-private:
+ private:
   list<Symbol *> table;
 
-public:
+ public:
   SymbolTable();
   /* ~SymbolTable(); */
   static ErrorType validLabel(string);

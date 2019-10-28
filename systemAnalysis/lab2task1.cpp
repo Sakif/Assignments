@@ -13,8 +13,7 @@ unsigned nthPrime(unsigned n) {
         break;
       }
     }
-    if (check == 0)
-      c++;
+    if (check == 0) c++;
     if (c == n) {
       prime = i;
       break;
