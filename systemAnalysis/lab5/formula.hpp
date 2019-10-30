@@ -1,5 +1,5 @@
 /*
-Sakif Fahmid Zaman
+Author: Sakif Fahmid Zaman
 */
 
 #pragma once
@@ -14,7 +14,7 @@ using namespace std;
 #define FORMULA
 
 class formula {
-public:
+ public:
   formula *op1, *op2;
   int value, find, depth;
   string formulaString, formulaOparand1String, formulaOparand2String;
