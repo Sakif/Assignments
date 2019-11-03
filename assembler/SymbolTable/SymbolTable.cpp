@@ -18,22 +18,16 @@ void SymbolTable::addSymbol(string label, int value, SymbolType type) {
 
 ErrorType SymbolTable::validLabel(string lbl) {
   auto error = NO_ERROR;
-  if (lbl.length() > maxSymbolLength)
-    return LABEL_TOO_LONG;
-  if (INVALID_FIRST_CHAR(lbl.at(0)))
-    return INVALID_FIRST_CHARACTER;
-  for (auto ch : lbl) {
-    if (INVALID_CHAR(ch))
-      return INVALID_CHARACTER;
-  }
+  if (lbl.length() > maxSymbolLength) return LABEL_TOO_LONG;
+  if (INVALID_FIRST_CHAR(lbl.at(0))) return INVALID_FIRST_CHARACTER;
+  for (auto ch : lbl)
+    if (INVALID_CHAR(ch)) return INVALID_CHARACTER;
   return error;
 }
 
 Symbol *SymbolTable::find(string lbl) {
-  for (auto node : table) {
-    if (node->getLabel() == lbl)
-      return node;
-  }
+  for (auto node : table)
+    if (node->getLabel() == lbl) return node;
   return nullptr;
 }
 

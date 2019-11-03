@@ -32,8 +32,7 @@ class SymbolTable {
     out << " | " << setw(6) << "Hex";
     /* decimal value */
     out << " | Dec" << endl;
-    for (auto node : st.table)
-      out << *node << endl;
+    for (auto node : st.table) out << *node << endl;
     return out;
   }
 };

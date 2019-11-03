@@ -10,10 +10,7 @@ enum SymbolType {
   REGISTER
 };
 
-const std::string symbolTypeToString[] = {
-    "UNKNOWN",
-    "LABEL",
-    "REGISTER"};
+const std::string symbolTypeToString[] = {"UNKNOWN", "LABEL", "REGISTER"};
 
 #endif
 

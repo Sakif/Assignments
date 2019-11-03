@@ -2,19 +2,19 @@
 #define ASSEMBLER
 
 #pragma once
-#include "SymbolTable.hpp"
 #include <fstream>
 #include <iostream>
+#include "SymbolTable.hpp"
 
 using namespace std;
 
 class Assembler {
-private:
+ private:
   ifstream asmFile;
   ofstream lisFile;
   SymbolTable symbol_table;
 
-public:
+ public:
   Assembler(string fileName);
   ~Assembler();
 

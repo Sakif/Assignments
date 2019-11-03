@@ -21,15 +21,13 @@ Assembler::~Assembler() {
 }
 
 list<string> Assembler::tokenize(string line, bool removeComment, string delim) {
-  if (removeComment)
-    line = line.substr(0, line.find_first_of(";"));
+  if (removeComment) line = line.substr(0, line.find_first_of(";"));
   regex rx(delim);
   list<string> tokens;
   sregex_token_iterator itr(line.begin(), line.end(), rx, -1);
   sregex_token_iterator end;
   while (itr != end) {
-    if (itr->length() > 0)
-      tokens.push_back(*itr);
+    if (itr->length() > 0) tokens.push_back(*itr);
     itr++;
   }
   return tokens;
@@ -39,16 +37,16 @@ ErrorType Assembler::constantToInteger(string token, int &value) {
   auto firstCharacter = token.at(0);
   auto number = token.erase(0, 1);
   switch (firstCharacter) {
-  case '#':
-    value = stoi(number);
-    return NO_ERROR;
-    break;
-  case '$':
-    value = stoi(number, 0, 16);
-    return NO_ERROR;
-    break;
-  default:
-    return INVALID_CONSTANT_START;
-    break;
+    case '#':
+      value = stoi(number);
+      return NO_ERROR;
+      break;
+    case '$':
+      value = stoi(number, 0, 16);
+      return NO_ERROR;
+      break;
+    default:
+      return INVALID_CONSTANT_START;
+      break;
   }
 }
