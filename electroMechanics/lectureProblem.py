@@ -1,7 +1,6 @@
 from os import system
 from scipy.constants import mu_0
-
-system("clear")
+import numpy as np
 
 title = " Lecture 2 Page 5 "
 print(f"{title:#^80}")
@@ -92,5 +91,40 @@ fluxDensity = mmf / eqReluctance
 print(f"Flux density: {fluxDensity:.4} Wb")
 
 system("clear")
-lbl = " Hi "
+lbl = " Note 7 Page 2 "
 print(f"{lbl:#^80}")
+
+motorVoltage = 230  # V
+armatureResistance = 0.2  # Ohm
+armatureCurrent = 205  # A
+backEmf = motorVoltage - armatureCurrent * armatureResistance
+print(f"Back emf: {backEmf:.4} V")
+powerArmature = backEmf * armatureCurrent
+print(f"net power: {powerArmature*1e-3:.4} kW")
+rotation = 1750  # rpm
+rotationLoss = 1445  # W
+outputPower = powerArmature - rotationLoss
+print(f"Output power: {outputPower*1e-3:.4} kW")
+torque = outputPower
+torque /= 2 * np.pi / 60
+torque /= rotation
+print(f"torque: {torque:.4} N m")
+
+lbl = " Note 7 Page 4 "
+print(f"{lbl:#^80}")
+motorPower = 5  # hp
+motorVoltage = 240  # V
+resistance = 0.6  # Ohm
+power = 10 * 745.7  # W
+Ia = pow(motorVoltage, 2) - power * 4 * resistance
+Ia = motorVoltage - np.sqrt(Ia)
+Ia /= 2 * resistance
+print(f"Armeture Current: {Ia:.4} A")
+
+Iam = motorVoltage
+Iam /= 2 * resistance
+print(f"Current in armature: {Iam:.4} A")
+
+Pam = pow(motorVoltage, 2)
+Pam /= 4 * resistance
+print(f"p_am: {Pam:.4} W")
