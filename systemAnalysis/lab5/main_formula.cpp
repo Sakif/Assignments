@@ -3,10 +3,10 @@
 //
 // This version,
 // started 10.31.2015
-#include "adder_class.h"
-#include "formula_class.h"
 #include <iostream>
 #include <string>
+#include "adder_class.h"
+#include "formula_class.h"
 
 using namespace std;
 
