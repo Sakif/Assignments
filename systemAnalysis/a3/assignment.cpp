@@ -17,11 +17,8 @@ assignment::assignment(string inFileName, string outFileName) {
   outFile.open(outFileName);
 
   inFile >> parameterL;
-  if (!validLIN(parameterL)) throw 20;
   inFile >> parameterI;
-  if (!validLIN(parameterI)) throw 20;
   inFile >> parameterN;
-  if (!validLIN(parameterN)) throw 20;
 
   inFile >> parameterM;
   if (!validMQP(parameterM)) throw 22;
@@ -42,6 +39,29 @@ assignment::~assignment() {
   inFile.close();
   outFile.close();
   while (!packetSendTime.empty()) packetSendTime.pop_back();
+}
+
+bool assignment::validParam() const {
+  auto validCount = 0;
+  validCount += validLIN(parameterL);
+  clog << "Valid L " << validLIN(parameterL) << endl;
+
+  validCount += validLIN(parameterI);
+  clog << "Valid I " << validLIN(parameterI) << endl;
+
+  validCount += validLIN(parameterN);
+  clog << "Valid N " << validLIN(parameterN) << endl;
+
+  validCount += validMQP(parameterM);
+  clog << "Valid M " << validMQP(parameterM) << endl;
+
+  validCount += validMQP(parameterP);
+  clog << "Valid P " << validMQP(parameterP) << endl;
+
+  validCount += validMQP(parameterQ);
+  clog << "Valid Q " << validMQP(parameterQ) << endl;
+
+  return validCount > 6;
 }
 
 void assignment::test() {

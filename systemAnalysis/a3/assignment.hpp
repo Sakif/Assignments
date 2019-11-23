@@ -21,6 +21,7 @@ private:
 public:
   assignment(string = "input.txt", string = "output.txt");
   ~assignment();
+  bool validParam() const;
   void test();
 };
 
