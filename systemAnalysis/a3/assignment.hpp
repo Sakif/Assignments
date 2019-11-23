@@ -15,13 +15,14 @@ class assignment {
 private:
   ifstream inFile;
   ofstream outFile;
-  int parameterL, parameterI, parameterN, parameterM, parameterQ, parameterP;
+  int parameterL, parameterI, parameterN, parameterM, parameterQ, parameterP, packetCount;
   list<int> packetSendTime;
 
 public:
   assignment(string = "input.txt", string = "output.txt");
   ~assignment();
   bool validParam() const;
+  /* void sortPackets(); */
   void test();
 };
 

@@ -1,3 +1,8 @@
+/*
+Author: Sakif Fahmid Zaman
+ID: B00756635
+*/
+
 #include "assignment.hpp"
 
 using namespace std;
@@ -21,15 +26,12 @@ assignment::assignment(string inFileName, string outFileName) {
   inFile >> parameterN;
 
   inFile >> parameterM;
-  if (!validMQP(parameterM)) throw 22;
   inFile >> parameterQ;
-  if (!validMQP(parameterQ)) throw 22;
   inFile >> parameterP;
-  if (!validMQP(parameterP)) throw 22;
 
-  auto n = 0, s = 0;
-  inFile >> n;
-  for (auto i = 0; i < n; i++) {
+  auto s = 0;
+  inFile >> packetCount;
+  for (auto i = 0; i < packetCount; i++) {
     inFile >> s;
     packetSendTime.push_back(s);
   }
@@ -61,8 +63,16 @@ bool assignment::validParam() const {
   validCount += validMQP(parameterQ);
   clog << "Valid Q " << validMQP(parameterQ) << endl;
 
+  validCount += (packetCount < 1001 && packetCount > 0);
+  clog << "Valid n " << (packetCount < 1001 && packetCount > 0) << endl;
+
   return validCount > 6;
 }
+
+/* 
+not needed as they are unique
+void assignment::sortPackets() { packetSendTime.sort(); }
+*/
 
 void assignment::test() {
   /* outFile << "Parameter L: " << parameterL << endl;
@@ -70,8 +80,8 @@ void assignment::test() {
   outFile << "Parameter N: " << parameterN << endl;
   outFile << "Parameter M: " << parameterM << endl;
   outFile << "Parameter Q: " << parameterQ << endl;
-  outFile << "Parameter P: " << parameterP << endl;
+  outFile << "Parameter P: " << parameterP << endl;*/
 
-  outFile << "n: " << packetSendTime.size() << endl;
-  for (auto i : packetSendTime) outFile << i << endl; //*/
+  outFile << "packetCount: " << packetSendTime.size() << endl;
+  for (auto i : packetSendTime) outFile << i << endl;  //*/
 }
