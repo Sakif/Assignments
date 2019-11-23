@@ -69,8 +69,23 @@ bool assignment::validParam() const {
   return validCount > 6;
 }
 
+collition assignment::conflict(int earlyPacket, int latePacket) {
+  auto colitionType = NoCollition;
+  return colitionType;
+}
+
+void assignment::simulate() {
+  auto previousPacket = -1, currentPacket = 0;
+  while (!packetSendTime.empty()) {
+    currentPacket = packetSendTime.front();
+    packetSendTime.pop_front();
+    auto f = conflict(previousPacket, currentPacket);
+    cout << f << endl;
+  }
+}
+
 /* 
-not needed as they are unique
+not needed as they are unique and sorted
 void assignment::sortPackets() { packetSendTime.sort(); }
 */
 
@@ -80,8 +95,7 @@ void assignment::test() {
   outFile << "Parameter N: " << parameterN << endl;
   outFile << "Parameter M: " << parameterM << endl;
   outFile << "Parameter Q: " << parameterQ << endl;
-  outFile << "Parameter P: " << parameterP << endl;*/
-
+  outFile << "Parameter P: " << parameterP << endl;
   outFile << "packetCount: " << packetSendTime.size() << endl;
-  for (auto i : packetSendTime) outFile << i << endl;  //*/
+ for (auto i : packetSendTime) outFile << i << endl;  //*/
 }
