@@ -71,6 +71,12 @@ bool assignment::validParam() const {
 
 collition assignment::conflict(int earlyPacket, int latePacket) {
   auto colitionType = NoCollition;
+  if (earlyPacket + parameterL < latePacket)
+    colitionType = NoDetection;
+  else if (earlyPacket)
+    colitionType = IdCollition;
+  else if (earlyPacket)
+    colitionType = DataCollition;
   return colitionType;
 }
 
