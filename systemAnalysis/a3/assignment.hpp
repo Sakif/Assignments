@@ -17,7 +17,7 @@ private:
   ofstream outFile;
   int parameterL, parameterI, parameterN, parameterM, parameterQ, parameterP, packetCount;
   list<int> packetSendTime;
-  collition conflict(int, int);
+  char conflict(int, int);
 
 public:
   assignment(string = "input.txt", string = "output.txt");

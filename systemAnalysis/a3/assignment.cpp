@@ -69,14 +69,14 @@ bool assignment::validParam() const {
   return validCount > 6;
 }
 
-collition assignment::conflict(int earlyPacket, int latePacket) {
-  auto colitionType = NoCollition;
+char assignment::conflict(int earlyPacket, int latePacket) {
+  auto colitionType = 'D';
   if (earlyPacket + parameterL < latePacket)
-    colitionType = NoDetection;
+    colitionType = 'S';
   else if (earlyPacket)
-    colitionType = IdCollition;
+    colitionType = 'a';
   else if (earlyPacket)
-    colitionType = DataCollition;
+    colitionType = 'd';
   return colitionType;
 }
 
@@ -89,11 +89,6 @@ void assignment::simulate() {
     cout << f << endl;
   }
 }
-
-/* 
-not needed as they are unique and sorted
-void assignment::sortPackets() { packetSendTime.sort(); }
-*/
 
 void assignment::test() {
   /* outFile << "Parameter L: " << parameterL << endl;
