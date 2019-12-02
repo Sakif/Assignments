@@ -80,23 +80,28 @@ char assignment::conflict(int earlyPacket, int latePacket) {
   return colitionType;
 }
 
-void assignment::simulate() {
-  auto previousPacket = -1, currentPacket = 0;
-  while (!packetSendTime.empty()) {
-    currentPacket = packetSendTime.front();
-    packetSendTime.pop_front();
-    auto f = conflict(previousPacket, currentPacket);
-    cout << f << endl;
+char assignment::checkP(list<int>::iterator cp) {
+  auto collition = 'S';
+  auto pp = cp;
+  pp--;
+  while (*pp) {
   }
+  return collition;
 }
 
-void assignment::test() {
-  /* outFile << "Parameter L: " << parameterL << endl;
-  outFile << "Parameter I: " << parameterI << endl;
-  outFile << "Parameter N: " << parameterN << endl;
-  outFile << "Parameter M: " << parameterM << endl;
-  outFile << "Parameter Q: " << parameterQ << endl;
-  outFile << "Parameter P: " << parameterP << endl;
-  outFile << "packetCount: " << packetSendTime.size() << endl;
- for (auto i : packetSendTime) outFile << i << endl;  //*/
+char assignment::checkN(list<int>::iterator cp) {
+  auto collition = 'S';
+  auto np = cp;
+  np++;
+  while (*np) {
+  }
+  return collition;
+}
+
+void assignment::simulate() {
+  for (auto cp = packetSendTime.begin(); cp != packetSendTime.end(); cp++) {
+    auto c = checkP(cp);
+    if (c != 'S') c = checkN(cp);
+    cout << c << endl;
+  }
 }

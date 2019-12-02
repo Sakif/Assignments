@@ -18,6 +18,8 @@ private:
   int parameterL, parameterI, parameterN, parameterM, parameterQ, parameterP, packetCount;
   list<int> packetSendTime;
   char conflict(int, int);
+  char checkN(list<int>::iterator);
+  char checkP(list<int>::iterator);
 
 public:
   assignment(string = "input.txt", string = "output.txt");

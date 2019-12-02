@@ -8,7 +8,6 @@ int main(const int argc, const char** argv) {
   else {
     assignment app(argv[1]);
     if (app.validParam()) {
-      app.test();
     } else
       cout << "Invalid parameter." << endl;
   }
