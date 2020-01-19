@@ -5,6 +5,8 @@ using namespace std;
 int main(int argc, char **argv) {
   if (argc < 2)
     cout << "Specify the assembly file that you wish to compile." << endl;
+  else if (argc > 2)
+    cout << "Cannot compile more than 1 file." << endl;
   else {
     assembler xm2(argv[1]);
     auto pass1Good = xm2.firstPass();

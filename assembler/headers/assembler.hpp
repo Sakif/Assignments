@@ -15,14 +15,14 @@ private:
   ofstream outFile;
   unsigned lineNumber;
   int programCounter;
-  symbolTable sTable;
+  //symbolTable sTable;
 
-  string formatLine(string line) const;
-  string formatLine(list<string> tokens) const;
+  // string formatLine(string line) const;
+  // string formatLine(list<string> tokens) const;
   vector<string> tokenize(string line, bool removeComment = false, string dlim = "\\s+");
 
 public:
-  assembler(string file);
+  assembler(string);
   ~assembler();
 
   bool firstPass();
