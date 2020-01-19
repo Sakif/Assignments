@@ -1,4 +1,4 @@
-#include "SymbolTable.hpp"
+#include "symbolTable.hpp"
 
 SymbolTable::SymbolTable() {
   addSymbol("R0", 0, REGISTER);
@@ -30,13 +30,3 @@ Symbol *SymbolTable::find(string lbl) {
     if (node->getLabel() == lbl) return node;
   return nullptr;
 }
-
-/*
-SymbolTable::~SymbolTable() {
-  while (head != nullptr) {
-    auto temp = head;
-    head = head->next();
-    delete temp;
-  }
-}
-*/

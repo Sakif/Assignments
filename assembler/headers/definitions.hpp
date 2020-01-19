@@ -3,7 +3,6 @@
 
 #ifndef SYMBOL_TYPE
 #define SYMBOL_TYPE
-
 enum SymbolType {
   UNKNOWN,
   LABEL,
@@ -11,7 +10,6 @@ enum SymbolType {
 };
 
 const std::string symbolTypeToString[] = {"UNKNOWN", "LABEL", "REGISTER"};
-
 #endif
 
 #ifndef SYMBOL_CONSTANTS
@@ -20,12 +18,8 @@ const auto maxSymbolLength = 32U;
 const auto maxTypeLength = symbolTypeToString[REGISTER].length();
 #endif
 
-#define INVALID_FIRST_CHAR(ch) (!isalpha(ch) && !(ch == '_'))
-#define INVALID_CHAR(ch) (!isalnum(ch) && !(ch == '_'))
-
 #ifndef ERROR_TYPES
 #define ERROR_TYPES
-
 enum ErrorType {
   NO_ERROR,
   LABEL_TOO_LONG,

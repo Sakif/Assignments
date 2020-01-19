@@ -4,7 +4,7 @@
 #pragma once
 #include <fstream>
 #include <iostream>
-#include "SymbolTable.hpp"
+#include "symbolTable.hpp"
 
 using namespace std;
 

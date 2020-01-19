@@ -1,4 +1,4 @@
-#include "Symbol.hpp"
+#include "symbol.hpp"
 
 using namespace std;
 

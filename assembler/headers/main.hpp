@@ -1,3 +1,3 @@
 #pragma once
-#include "Assembler.hpp"
-#include "SymbolTable.hpp"
+#include "assembler.hpp"
+#include "symbolTable.hpp"

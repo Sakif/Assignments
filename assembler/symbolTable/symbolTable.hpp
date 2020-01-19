@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <list>
-#include "Symbol.hpp"
+#include "symbol.hpp"
 
 using namespace std;
 
