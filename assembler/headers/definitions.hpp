@@ -1,38 +1,19 @@
 #pragma once
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <list>
+#include <sstream>
 #include <string>
+#include <vector>
 
-#ifndef SYMBOL_TYPE
-#define SYMBOL_TYPE
-enum SymbolType {
-  UNKNOWN,
-  LABEL,
-  REGISTER
-};
-
-const std::string symbolTypeToString[] = {"UNKNOWN", "LABEL", "REGISTER"};
+#ifndef MAX_LABEL_LENGTH
+#define MAX_LABEL_LENGTH 32
 #endif
 
-#ifndef SYMBOL_CONSTANTS
-#define SYMBOL_CONSTANTS
-const auto maxSymbolLength = 32U;
-const auto maxTypeLength = symbolTypeToString[REGISTER].length();
+#ifndef MAX_NUMBER_LENGTH
+#define MAX_NUMBER_LENGTH 65535
 #endif
 
-#ifndef ERROR_TYPES
-#define ERROR_TYPES
-enum ErrorType {
-  NO_ERROR,
-  LABEL_TOO_LONG,
-  INVALID_FIRST_CHARACTER,
-  INVALID_CHARACTER,
-  INVALID_CONSTANT_START
-};
-
-const std::string errorToString[] = {
-    "No error",
-    "The length of the label is greater than maximum allowed length",
-    "Label must start with _ or alphabetic character",
-    "Label can only contain _ or alphanumeric characters",
-    "The constant provided does not start with #, $ nor '"};
-
-#endif
+#define INVALID_FIRST_CHAR(ch) (!isalpha(ch) && !(ch == '_'))
+#define INVALID_CHAR(ch) (!isalnum(ch) && !(ch == '_'))
