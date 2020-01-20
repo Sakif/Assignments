@@ -35,3 +35,17 @@ vector<string> assembler::tokenize(string line, bool removeComment, string dlim)
   tokens.resize(tokens.size());
   return tokens;
 }
+
+string assembler::formatLine(string line) const {
+  stringstream s;
+  s << lineNumber << "\t" << programCounter << "\t" << line;
+  return s.str();
+}
+
+string assembler::formatLine(vector<string> tokens) const {
+  stringstream s;
+  s << lineNumber << "\t" << programCounter << "\t";
+  for (auto i = 0U; i < tokens.size(); i++)
+    s << tokens.at(i) << "\t";
+  return s.str();
+}

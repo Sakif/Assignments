@@ -17,9 +17,9 @@ private:
   int programCounter;
   //symbolTable sTable;
 
-  // string formatLine(string line) const;
-  // string formatLine(list<string> tokens) const;
-  vector<string> tokenize(string line, bool removeComment = false, string dlim = "\\s+");
+  string formatLine(string) const;
+  string formatLine(vector<string>) const;
+  vector<string> tokenize(string, bool = true, string = "\\s+");
 
 public:
   assembler(string);
