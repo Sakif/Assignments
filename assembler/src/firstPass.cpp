@@ -19,8 +19,10 @@ bool assembler::firstPass() {
 
 void assembler::lineProcessingFirstPass(vector<string> tokens) {
   auto tokenCount = 0U;
-  if (tokens.size() > 0) {
-    auto inst = findISA(tokens.at(0));
-    if (inst.name != "") programCounter += inst.pcIncrement;
+  if (tokens.size() < 1) return;
+  auto inst = findISA(tokens.at(0));
+  if (inst.name != "")
+    programCounter += inst.pcIncrement;
+  else {
   }
 }
