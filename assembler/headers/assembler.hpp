@@ -21,6 +21,8 @@ private:
   string formatLine(vector<string>) const;
   vector<string> tokenize(string, bool = true, string = "\\s+");
 
+  void lineProcessingFirstPass(vector<string>);
+
 public:
   assembler(string);
   ~assembler();

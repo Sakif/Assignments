@@ -5,25 +5,31 @@ using namespace std;
 
 #ifndef SYMBOL_TYPE
 #define SYMBOL_TYPE
+
 enum SymbolType {
   UNKNOWN,
   LABEL,
   REGISTER
 };
+
 const string symbolTypeToString[] = {"UNKNOWN", "LABEL", "REGISTER"};
+
 #endif
 
 #ifndef SYMBOL
 #define SYMBOL
+
 struct symbol {
   string label;
   SymbolType type;
   int value;
 };
+
 #endif
 
 #ifndef SYMBOL_TABLE
 #define SYMBOL_TABLE
+
 class symbolTable {
 private:
   list<symbol> table;
@@ -32,4 +38,5 @@ public:
   symbolTable();
   void printTable(ofstream &);
 };
+
 #endif
