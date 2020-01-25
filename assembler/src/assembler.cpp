@@ -5,9 +5,9 @@ using namespace std;
 assembler::assembler(string file) {
   auto extention = file.substr(file.find_last_of('.'));
   if (extention == ".asm") {
-    auto lisFile = file.substr(0, file.find_last_of('.'));
-    lisFile.append(".lis");
-    outFile.open(lisFile);
+    auto outFile = file.substr(0, file.find_last_of('.'));
+    outFile.append(".lis");
+    lisFile.open(outFile);
     asmFile.open(file);
     lineNumber = 1;
     programCounter = 0;
@@ -17,7 +17,7 @@ assembler::assembler(string file) {
 
 assembler::~assembler() {
   asmFile.close();
-  outFile.close();
+  lisFile.close();
 }
 
 vector<string> assembler::tokenize(string line, bool removeComment, string dlim) {

@@ -12,10 +12,10 @@ using namespace std;
 class assembler {
 private:
   ifstream asmFile;
-  ofstream outFile;
+  ofstream lisFile;
   unsigned lineNumber;
   int programCounter;
-  //symbolTable sTable;
+  symbolTable sTable;
 
   string formatLine(string) const;
   string formatLine(vector<string>) const;
