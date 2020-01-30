@@ -20,13 +20,20 @@ bool assembler::firstPass() {
 
 void assembler::lineProcessingFirstPass(vector<string> tokens) {
   auto tokenCount = 0U;
-  if (tokens.size() < 1) return;
-  auto inst = findISA(tokens.at(tokenCount));
-  if (inst.name != "") {
-    programCounter += inst.pcIncrement;
-    lisFile << "Instruction found: " << inst.name << endl;
-  } else {
-    auto validLabel = sTable.validLabel(tokens.at(tokenCount));
-    if (!validLabel) lisFile << err << errorString[INVALID_LABLE] << endl;
+  if (tokens.size() < 1)
+    return;
+  else {
+    auto inst = findISA(tokens.at(tokenCount));
+    if (inst.name != "") {
+      programCounter += inst.pcIncrement;
+      lisFile << "Instruction found: " << inst.name << endl;
+      tokenCount++;
+
+    } else {
+      auto validLabel = sTable.validLabel(tokens.at(tokenCount));
+      if (!validLabel) lisFile << err << errorString[INVALID_LABLE] << endl;
+    }
+    if (++tokenCount > tokens.size())
+      return;
   }
 }

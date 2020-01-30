@@ -38,7 +38,9 @@ public:
   symbolTable();
   bool validLabel(string) const;
   symbol find(string) const;
-  void printTable(ofstream &);
+  void printTable(ofstream &) const;
+
+  void addSymbol(string, SymbolType, int);
 };
 
 #endif

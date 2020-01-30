@@ -14,11 +14,11 @@ int main(int argc, char **argv) {
     if (pass1Good) {
       pass2Good = xm2.secondPass();
       if (!pass2Good)
-        cout << "\u274C\tCompilation failed on second pass." << endl;
+        cout << err << "Compilation failed on second pass." << endl;
       else
-        cout << "\u2714\tCompilation compleated." << endl;
+        cout << err << "Compilation compleated." << endl;
     } else
-      cout << "\u274C\tCompilation failed on first pass." << endl;
+      cout << err << "Compilation failed on first pass." << endl;
   }
   return 0;
 }

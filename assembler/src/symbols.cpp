@@ -21,9 +21,8 @@ symbolTable::symbolTable() {
   table.push_back(a);
 }
 
-void symbolTable::printTable(ofstream &out) {
-  out << endl
-      << "SYMBOL TABLE" << endl;
+void symbolTable::printTable(ofstream &out) const {
+  out << "\nSYMBOL TABLE" << endl;
   for (auto s : table) {
     out << s.label << ", ";
     out << symbolTypeToString[s.type] << ", ";
@@ -38,4 +37,9 @@ bool symbolTable::validLabel(string l) const {
   for (auto c : l)
     if (INVALID_CHAR(c)) valid = false;
   return valid;
+}
+
+void symbolTable::addSymbol(string n, SymbolType t, int v) {
+  symbol a = {n, t, v};
+  table.push_back(a);
 }
