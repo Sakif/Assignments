@@ -18,22 +18,31 @@ bool assembler::firstPass() {
   return passed;
 }
 
+bool assembler::isaProcess(string i) {
+  auto inst = findISA(n);
+  if (inst.pcIncrement > -1) {
+    programCounter += inst.pcIncremnt;
+    return true;
+  }
+  return false;
+}
+
 void assembler::lineProcessingFirstPass(vector<string> tokens) {
   auto tokenCount = 0U;
   if (tokens.size() < 1)
     return;
   else {
-    auto inst = findISA(tokens.at(tokenCount));
-    if (inst.name != "") {
+    /*   auto inst = findISA(tokens.at(tokenCount));
+    if (inst.pcIncrement > -1) {
       programCounter += inst.pcIncrement;
-      lisFile << "Instruction found: " << inst.name << endl;
       tokenCount++;
-
-    } else {
+    }*/
+    else {
       auto validLabel = sTable.validLabel(tokens.at(tokenCount));
       if (!validLabel) lisFile << err << errorString[INVALID_LABLE] << endl;
     }
-    if (++tokenCount > tokens.size())
+    if (++tokenCount > tokens.size()) {
       return;
+    }
   }
 }

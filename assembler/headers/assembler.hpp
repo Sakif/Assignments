@@ -25,6 +25,7 @@ private:
 
   // helper functions for 1st pass
   void lineProcessingFirstPass(vector<string>);
+  void isaProcess(string);
 
 public:
   assembler(string);

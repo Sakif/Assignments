@@ -8,10 +8,21 @@ using namespace std;
 
 struct instruction {
   string name;
-  unsigned pcIncrement;
+  int pcIncrement;
+  bool directory;
 };
 
-const vector<instruction> isaTable = {{"ADD", 2}, {"BNE", 2}, {"CMP", 2}, {"END", 2}, {"LD", 2}, {"MOVLS", 2}, {"MOVLZ", 2}, {"org", 0}, {"ST", 2}, {"word", 0}};
+const vector<instruction> isaTable = {
+    {"ADD", 2, false},
+    {"BNE", 2, false},
+    {"CMP", 2, false},
+    {"END", 2, false},
+    {"LD", 2, false},
+    {"MOVLS", 2, false},
+    {"MOVLZ", 2, false},
+    {"ORG", 0, true},
+    {"ST", 2, false},
+    {"WORD", 0, true}};
 
 instruction findISA(string);
 
