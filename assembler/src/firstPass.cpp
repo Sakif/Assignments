@@ -37,7 +37,7 @@ void assembler::lineProcessingFirstPass(vector<string> tokens) {
       tokenCount++;
     else {
       auto validLabel = sTable.validLabel(tokens.at(tokenCount));
-      if (!validLabel) lisFile << err << errorString[INVALID_LABLE] << endl;
+      if (!validLabel) lisFile << err << errorString[INVALID_LABEL] << endl;
     }
     if (++tokenCount > tokens.size()) {
       return;

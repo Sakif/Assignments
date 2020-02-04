@@ -9,7 +9,7 @@ using namespace std;
 enum error {
   NO_ERROR,
   UNEXPECTED_TOKEN,
-  INVALID_LABLE
+  INVALID_LABEL
 };
 
 const string err = "\u274C\t";
