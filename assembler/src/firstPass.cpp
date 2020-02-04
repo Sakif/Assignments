@@ -19,12 +19,12 @@ bool assembler::firstPass() {
 }
 
 bool assembler::isaProcess(string i) {
-  auto inst = findISA(n);
+  auto inst = findISA(i);
   if (inst.pcIncrement > -1) {
-    programCounter += inst.pcIncremnt;
+    programCounter += inst.pcIncrement;
     return true;
-  }
-  return false;
+  } else
+    return false;
 }
 
 void assembler::lineProcessingFirstPass(vector<string> tokens) {
@@ -32,11 +32,9 @@ void assembler::lineProcessingFirstPass(vector<string> tokens) {
   if (tokens.size() < 1)
     return;
   else {
-    /*   auto inst = findISA(tokens.at(tokenCount));
-    if (inst.pcIncrement > -1) {
-      programCounter += inst.pcIncrement;
+    auto isInstruction = isaProcess(tokens.at(tokenCount));
+    if (isInstruction)
       tokenCount++;
-    }*/
     else {
       auto validLabel = sTable.validLabel(tokens.at(tokenCount));
       if (!validLabel) lisFile << err << errorString[INVALID_LABLE] << endl;

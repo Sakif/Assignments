@@ -43,3 +43,10 @@ void symbolTable::addSymbol(string n, SymbolType t, int v) {
   symbol a = {n, t, v};
   table.push_back(a);
 }
+
+symbol symbolTable::find(string o) const {
+  symbol f = {"", UNKNOWN, -1};
+  for (auto a : table)
+    if (a.label == o) return a;
+  return f;
+}
