@@ -32,15 +32,21 @@ void assembler::lineProcessingFirstPass(vector<string> tokens) {
   if (tokens.size() < 1)
     return;
   else {
-    auto isInstruction = isaProcess(tokens.at(tokenCount));
-    if (isInstruction)
-      tokenCount++;
-    else {
+    auto is1stInstruction = isaProcess(tokens.at(tokenCount));
+
+    if (!is1stInstruction) {
       auto validLabel = sTable.validLabel(tokens.at(tokenCount));
-      if (!validLabel) lisFile << err << errorString[INVALID_LABEL] << endl;
+      if (!validLabel)
+        lisFile << err << errorString[INVALID_LABEL] << endl;
+      else {
+        auto label = sTable.find(tokens.at(tokenCount));
+        if (label.value < 0) sTable.addSymbol(tokens.at(tokenCount), LABEL, programCounter);
+      }
     }
+
     if (++tokenCount > tokens.size()) {
-      return;
+      auto is2ndInstruction = isaProcess(tokens.at(tokenCount));
+      if (!is2ndInstruction) return;
     }
   }
 }
