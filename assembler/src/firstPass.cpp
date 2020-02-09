@@ -33,7 +33,6 @@ void assembler::lineProcessingFirstPass(vector<string> tokens) {
     return;
   else {
     auto is1stInstruction = isaProcess(tokens.at(tokenCount));
-
     if (!is1stInstruction) {
       auto validLabel = sTable.validLabel(tokens.at(tokenCount));
       if (!validLabel)
@@ -41,12 +40,16 @@ void assembler::lineProcessingFirstPass(vector<string> tokens) {
       else {
         auto label = sTable.find(tokens.at(tokenCount));
         if (label.value < 0) sTable.addSymbol(tokens.at(tokenCount), LABEL, programCounter);
+        if (++tokenCount < tokens.size()) {
+          auto is2ndInstruction = isaProcess(tokens.at(tokenCount));
+          if (!is2ndInstruction) {
+            lisFile << err << "Not an instruction." << endl;
+            return;
+          }
+        } else {
+          return;
+        }
       }
-    }
-
-    if (++tokenCount > tokens.size()) {
-      auto is2ndInstruction = isaProcess(tokens.at(tokenCount));
-      if (!is2ndInstruction) return;
     }
   }
 }
