@@ -43,7 +43,7 @@ void assembler::lineProcessingFirstPass(vector<string> tokens) {
         if (++tokenCount < tokens.size()) {
           auto is2ndInstruction = isaProcess(tokens.at(tokenCount));
           if (!is2ndInstruction) {
-            lisFile << err << "Not an instruction." << endl;
+            lisFile << err << errorString[NOT_INSTRUCTION] << endl;
             return;
           }
         } else {
