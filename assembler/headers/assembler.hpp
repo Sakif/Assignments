@@ -17,6 +17,8 @@ private:
   unsigned lineNumber;
   int programCounter;
   symbolTable sTable;
+  unsigned tokenCount = 0;
+  vector<string> tokens;
 
   // helper functions
   string formatLine(string) const;
@@ -25,7 +27,7 @@ private:
   vector<int> processOperands(string);
 
   // helper functions for 1st pass
-  void lineProcessingFirstPass(vector<string>);
+  void lineProcessingFirstPass();
   bool isaProcess(string);
 
 public:

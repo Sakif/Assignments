@@ -13,3 +13,5 @@
 
 #define INVALID_FIRST_CHAR(ch) (!isalpha(ch) && !(ch == '_'))
 #define INVALID_CHAR(ch) (!isalnum(ch) && !(ch == '_'))
+
+int token2int(std::string s);
