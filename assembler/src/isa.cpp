@@ -10,6 +10,6 @@ instruction findISA(string n) {
   /* search the ISA table to see if n exist,
    * if it is does then return the ISA */
   for (auto i = 0U; i < isaTable.size(); i++)
-    if (isaTable.at(i).name == n) return isaTable.at(i);
+    if (isaTable[i].name == n) return isaTable[i];
   return ins;
 }

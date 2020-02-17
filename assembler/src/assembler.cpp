@@ -49,3 +49,13 @@ string assembler::formatLine(vector<string> tokens) const {
     s << tokens.at(i) << "\t";
   return s.str();
 }
+
+vector<int> assembler::processOperands(string tok) {
+  vector<int> out;
+  string token;
+  stringstream l(tok);
+  while (getline(l, token, ',')) {
+    lisFile << token[0] << endl;
+  }
+  return out;
+}

@@ -22,6 +22,7 @@ private:
   string formatLine(string) const;
   string formatLine(vector<string>) const;
   vector<string> tokenize(string, bool = true, string = "\\s+");
+  vector<int> processOperands(string);
 
   // helper functions for 1st pass
   void lineProcessingFirstPass(vector<string>);
