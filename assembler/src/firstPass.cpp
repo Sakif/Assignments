@@ -39,7 +39,11 @@ bool assembler::isaProcess() {
   programCounter += inst.pcIncrement;
   if (inst.directory) {
     if (inst.op != NO_OP || inst.op != OPTIONAL) {
-      if (++tokenCount > tokens.size()) lisFile << err << errorString[NO_OP_FOUND] << endl;
+      if (++tokenCount > tokens.size())
+        lisFile << err << errorString[NO_OP_FOUND] << endl;
+      else {
+        auto opTokens = tokenize(tokens[tokenCount], false, ",");
+      }
     }
   }
   return true;
