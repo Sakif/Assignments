@@ -12,6 +12,7 @@ void assembler(string file) {
     auto outFile = file.substr(0, file.find_last_of('.'));
     outFile.append(".lis");
     lisFile.open(outFile);
+    asmFile.open(file);
   } else
     cout << err << "Please enter a file .asm file." << endl;
 }
@@ -19,4 +20,9 @@ void assembler(string file) {
 void endAssembler() {
   lisFile.close();
   asmFile.close();
+}
+
+string currentTime() {
+  auto timestamp = chrono::system_clock::to_time_t(chrono::system_clock::now());
+  return ctime(&timestamp);
 }

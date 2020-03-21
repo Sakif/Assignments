@@ -37,12 +37,16 @@ SymbolTable::SymbolTable() {
 Symbol* SymbolTable::begin() const { return head->next(); }
 
 ostream& operator<<(ostream& out, Symbol* const s) {
-  out << setw(MAX_LABEL_LENGTH) << left << s->name();
-  out << " | " << setw(8) << SymbolTypeToString[s->type];
-  out << " | " << right << setw(5) << s->value;
-  out << " (0x" << hex << setw(4) << setfill('0') << s->value;
-  out << ")" << setfill(' ');
-  if (s->type == UNKNOWN) out << "\t" << err << "Table contains unknown symbol.";
+  if (s == nullptr)
+    out << err << "Symbol does not exist.";
+  else {
+    out << setw(MAX_LABEL_LENGTH) << left << s->name();
+    out << " | " << setw(8) << SymbolTypeToString[s->type];
+    out << " | " << right << setw(5) << s->value;
+    out << " (0x" << hex << setw(4) << setfill('0') << s->value;
+    out << ")" << setfill(' ') << dec;
+    if (s->type == UNKNOWN) out << "\t" << err << "Table contains unknown symbol.";
+  }
   return out;
 }
 
@@ -71,3 +75,11 @@ bool validLabel(string l) {
     if (!ALPHANUMERIC(c)) return false;
   return valid;
 }
+
+Symbol* SymbolTable::find(string label) const {
+  for (auto itr = begin(); itr != nullptr; itr = itr->next())
+    if (itr->name() == label) return itr;
+  return nullptr;
+}
+
+bool duplicateSymbol() { return false; }

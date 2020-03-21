@@ -12,4 +12,6 @@ void assembler(string);
 
 void endAssembler();
 
+string currentTime();
+
 #endif

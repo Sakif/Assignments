@@ -9,8 +9,5 @@ int main(int argc, char** argv) {
     endAssembler();
   } else
     cout << err << "Please specify an assembly file you would like to compile." << endl;
-  auto stbl = SymbolTable();
-  stbl.newSymbol("r1", UNKNOWN, 51);
-  cout << stbl;
   return 0;
 }

@@ -25,6 +25,7 @@ public:
 
 bool validLabel(string);
 
+ostream& operator<<(ostream&, Symbol* const);
 #endif
 
 #ifndef SYMBOL_TABLE
@@ -39,10 +40,9 @@ public:
   ~SymbolTable();
   void newSymbol(string, SymbolType, short);
   Symbol* begin() const;
+  Symbol* find(string) const;
 };
 
-#endif
-
-ostream& operator<<(ostream&, Symbol* const);
-
 ostream& operator<<(ostream&, SymbolTable&);
+
+#endif
