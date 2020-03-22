@@ -60,6 +60,7 @@ SymbolTable::~SymbolTable() {
 }
 
 ostream& operator<<(ostream& out, SymbolTable& st) {
+  out << endl;
   out << "####################### SYMBOL TABLE #######################" << endl;
   out << "              NAME               |   TYPE   |     VALUE     " << endl;
   out << "============================================================" << endl;

@@ -14,4 +14,6 @@ void endAssembler();
 
 string currentTime();
 
+bool firstPass(string);
+
 #endif

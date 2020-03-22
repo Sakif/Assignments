@@ -5,6 +5,8 @@ ofstream lisFile;
 unsigned lineNumber;
 short programCounter;
 unsigned errorCount;
+vector<string> tokens;
+SymbolTable symbolTable;
 
 void assembler(string file) {
   auto extention = file.substr(file.find_last_of('.'));
