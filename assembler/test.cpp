@@ -6,7 +6,7 @@ using namespace std;
 
 vector<string> opTok = {"$80", "#0", "$FF00", "#1", "Label01,R0", "#16,R2", "\'"};
 
-int processOp(string op) {
+int oparandToInt(string op) {
   auto value = 0;
   if (op[0] == '#') {
     op.erase(0, 1);

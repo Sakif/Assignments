@@ -37,13 +37,18 @@ bool assembler::isaProcess() {
   auto inst = findISA(tokens[tokenCount]);
   if (inst.pcIncrement < 0) return false;
   programCounter += inst.pcIncrement;
+  /* process directory */
   if (inst.directory) {
     if (inst.op != NO_OP || inst.op != OPTIONAL) {
       if (++tokenCount > tokens.size())
         lisFile << err << errorString[NO_OP_FOUND] << endl;
-      else
+      else {
         auto opTokens = tokenize(tokens[tokenCount], false, ",");
+        directoryProcess(inst.name, opTokens[0], programCounter, sTable, lisFile);
+      }
     }
+  } else { /* process instruction */
+    lisFile << inst.name << endl;
   }
   return true;
 }

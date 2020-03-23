@@ -10,6 +10,6 @@ include_directories(headers)
 
 project(Assembler)
 
-#add_executable(assembler src/assembler.cpp src/firstPass.cpp src/secondPass.cpp src/symbols.cpp src/isa.cpp xm2.cpp)
+add_executable(assembler src/assembler.cpp src/firstPass.cpp src/secondPass.cpp src/symbols.cpp src/isa.cpp xm2.cpp)
 
-add_executable(t test.cpp) 
+#add_executable(t test.cpp) 

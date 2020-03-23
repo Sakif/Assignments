@@ -30,15 +30,20 @@ void printTokens() {
   lisFile << endl;
 }
 
-bool firstPass(string fileName) {
-  lineNumber = 1;
-  createHeader(fileName);
-  for (string line; getline(asmFile, line); lineNumber++) {
-    printLine(lineNumber, programCounter, line);
-    tokens = tokenize(line);
+void checkFirstToken() {
+  auto firstToken = tokens[0];
+  if (validLabel(firstToken)) {
+    auto duplicateSymbol = symbolTable.find(firstToken);
+    if (duplicateSymbol == nullptr)
+      symbolTable.newSymbol(firstToken, LABEL, programCounter);
+    else {
+      errorCount++;
+      lisFile << err << "Symbol already exist: " << firstToken << endl;
+    }
+  } else {
+    errorCount++;
+    lisFile << err << "Invalid label" << endl;
   }
-  lisFile << symbolTable << endl;
-  return false;
 }
 
 vector<string> tokenize(string line, bool removeComment, string delim) {
@@ -53,4 +58,24 @@ vector<string> tokenize(string line, bool removeComment, string delim) {
   }
   tokens.resize(tokens.size());
   return tokens;
+}
+
+bool firstPass(string fileName) {
+  lineNumber = 1;
+  createHeader(fileName);
+  for (string line; getline(asmFile, line); lineNumber++) {
+    printLine(lineNumber, programCounter, line);
+    tokens = tokenize(line);
+    if (tokens.size() > 3) {
+      errorCount++;
+      lisFile << err << "Encountered unexpected token" << endl;
+    }
+    checkFirstToken();
+  }
+  lisFile << symbolTable << endl;
+  lisFile << "Error count: " << errorCount << endl;
+  if (errorCount > 0)
+    return false;
+  else
+    return true;
 }

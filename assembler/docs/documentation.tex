@@ -1,0 +1,69 @@
+\documentclass[titlepage, 12pt]{article}
+\usepackage[letterpaper, margin=1in]{geometry}
+\usepackage{xcolor, hyperref}
+\pagecolor{black}
+\color{white}
+\pdfminorversion=7
+\renewcommand{\familydefault}{\sfdefault}
+\hypersetup{bookmarks=false, unicode=true, pdftoolbar=false, pdfmenubar=false, pdfstartview={FitH}, pdftitle={XM2}, pdfauthor={Sakif Fahmid Zaman}, pdfsubject={Computer Architecture}, colorlinks=true}
+
+\title{Design Document for XM2}
+\author{Sakif Fahmid Zaman}
+\begin{document}
+\maketitle\tableofcontents\clearpage
+\section{Introduction}
+Design document for XM2.
+
+\subsection{Basic concept}
+The assemble is to do the following process one after the other:
+\begin{enumerate}
+	\item open an ams file
+	\item read the file one line at a time
+	\item remove comments form the line
+	\item create tokens words on whitespace
+	\item check if first token is instruction or directive
+	\item IF token is instruction or directive then check if the second (last) token contains correct number and correct type of operands
+	\item ELSE check if first token is label, check if label has duplicate, update table if symbol is unknown
+	\item second token must be instruction or directive
+	\item if second token is instruction or directive ensure the third (last) token contains the correct number and correct type of operands
+\end{enumerate}
+
+\section{Data Dictionary}
+There are several item is the assembler process that require a data dictionary definition.
+\subsection{Record}
+Each line in the assembly file is a record. A record contains the following:
+
+record = (label) + ([instruction | directive] + (operands))
+
+\subsection{Symbols}
+Registers and labels are stored in the symbol table. Each symbol had the following information:
+
+symbol = name + [UNKNOWN | REGISTER | LABEL] + value
+
+where
+
+name = 1\{alphabetic\}1 + 0\{alphanumeric\}31
+
+The length of the symbol name cannot be more than 32 characters long, and
+
+alphabetic = [\_ | a-z | A-Z]
+
+alphanumeric = [\_ | a-z | A-Z | 0-9]
+
+\subsection{Instruction/Directive Table}
+The instructions and directives can be stores in a table with each record containing the following:
+
+ISTDID = name + operands + (byte code)
+
+operands = [INSTRUCTION | DIRECTIVE]
+
+To assist with searching a NONE can be added to type.
+
+\subsection{Assembler}
+The assembler must contain the following items:
+
+Assembler = asmFile + lisFile + lineNumber + programCounter + errorCounter + symbolTable
+
+\section{Block Diagram}
+
+\end{document}

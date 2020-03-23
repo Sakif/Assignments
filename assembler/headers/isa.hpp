@@ -1,5 +1,7 @@
 #pragma once
 #include "definitions.hpp"
+#include "error.hpp"
+#include "symbols.hpp"
 
 using namespace std;
 
@@ -57,6 +59,7 @@ const vector<instruction> isaTable = {
     {"BNZ", 2, false, BRANCH},
     {"BRA", 2, false, BRANCH},
     {"BZ", 2, false, BRANCH},
+    {"CEX", 2, false, MEMORY},
     {"CMP", 2, false, ARITHMETIC},
     {"CMP.B", 2, false, ARITHMETIC},
     {"CMP.W", 2, false, ARITHMETIC},
@@ -73,6 +76,8 @@ const vector<instruction> isaTable = {
     {"MOV", 2, false, MEMORY},
     {"MOV.B", 2, false, MEMORY},
     {"MOV.W", 2, false, MEMORY},
+    {"MOVH", 2, false, MEMORY},
+    {"MOVL", 2, false, MEMORY},
     {"MOVLS", 2, false, MEMORY},
     {"MOVLZ", 2, false, MEMORY},
     {"ORG", 0, true, CONSTANT},
@@ -94,22 +99,20 @@ const vector<instruction> isaTable = {
     {"STR", 2, false, OFFSET_MEMORY},
     {"STR.B", 2, false, OFFSET_MEMORY},
     {"STR.W", 2, false, OFFSET_MEMORY},
+    {"SVC", 2, false, CONSTANT},
     {"SWAP", 2, false, NO_OP},
     {"SWPB", 2, false, NO_OP},
     {"SWPB.W", 2, false, NO_OP},
+    {"SXT", 2, false, CONSTANT},
+    {"SXT.W", 2, false, CONSTANT},
     {"WORD", 0, true, CONSTANT},
     {"XOR", 2, false, ARITHMETIC},
     {"XOR.B", 2, false, ARITHMETIC},
     {"XOR.W", 2, false, ARITHMETIC}};
-/*
-SXT 0100111110000 r 
-SXT.W 0100111110000 r 
-SVC 010110000000 s 
-CEX 010111 c,t,t
-MOVL 01100 b,r 
 
-MOVH 01110 b,r 
-*/
 instruction findISA(string);
 
+int operandToInt(string);
+
+void directoryProcess(string, string, int&, symbolTable&, ostream&);
 #endif

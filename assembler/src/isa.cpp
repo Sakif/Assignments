@@ -13,3 +13,30 @@ instruction findISA(string n) {
     if (isaTable[i].name == n) return isaTable[i];
   return ins;
 }
+
+int operandToInt(string op) {
+  auto value = 0;
+  auto firstChar = op[0];
+  op.erase(0, 1);
+  if (firstChar == '#')
+    value = stoi(op);
+  else if (firstChar == '$')
+    value = stoi(op, 0, 16);
+  else if (firstChar == '\\')
+    value = op[0];
+  return value;
+}
+
+void directoryProcess(string n, string op, int& pc, symbolTable& stable, ostream& out) {
+  auto intHolder = 0;
+  if (n == "ORG") {
+    intHolder = operandToInt(op);
+    if (intHolder < MAX_NUMBER_LENGTH)
+      pc = intHolder;
+    else
+      out << err << endl;
+  } else if (n == "EQU") {
+    stable.find(op);
+  } else
+    out << err << endl;
+}
