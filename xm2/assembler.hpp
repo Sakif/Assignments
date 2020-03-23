@@ -3,8 +3,8 @@
 
 using namespace std;
 
-#ifndef ASSEMBLER
-#define ASSEMBLER
+#ifndef ASSEMBLER_H
+#define ASSEMBLER_H
 
 vector<string> tokenize(string, bool = true, string = "\\s+");
 

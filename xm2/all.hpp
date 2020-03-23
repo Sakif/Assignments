@@ -1,5 +1,4 @@
 #pragma once
-
 #include <chrono>
 #include <ctime>
 #include <fstream>
@@ -10,5 +9,6 @@
 #include <vector>
 
 #include "assembler.hpp"
+#include "commands.hpp"
 #include "constants.hpp"
 #include "symbols.hpp"

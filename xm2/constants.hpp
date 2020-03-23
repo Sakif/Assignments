@@ -7,6 +7,9 @@ Author: Sakif Fahmid Zaman
 
 using namespace std;
 
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
+
 const string err = "\u274C\t";
 
 #define MAX_LABEL_LENGTH 32
@@ -20,3 +23,5 @@ enum SymbolType { UNKNOWN,
                   REGISTER };
 
 const string SymbolTypeToString[] = {"UNKNOWN", "LABEL", "REGISTER"};
+
+#endif
