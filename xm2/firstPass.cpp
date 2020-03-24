@@ -30,19 +30,36 @@ void printTokens() {
   lisFile << endl;
 }
 
+bool processCommands(string cmd) {
+  auto commandIndex = checkTable(cmd);
+  if (commandIndex == COMMAND_NOT_FOUND)
+    return false;
+  else {
+    auto command = commands[commandIndex];
+    if (command.type == DIRECTORY)
+      programCounter += 0;
+    else
+      programCounter += 2;
+    return true;
+  }
+}
+
 void checkFirstToken() {
   auto firstToken = tokens[0];
-  if (validLabel(firstToken)) {
-    auto duplicateSymbol = symbolTable.find(firstToken);
-    if (duplicateSymbol == nullptr)
-      symbolTable.newSymbol(firstToken, LABEL, programCounter);
-    else {
+  auto isCommand = processCommands(firstToken);
+  if (!isCommand) {
+    if (validLabel(firstToken)) {
+      auto duplicateSymbol = symbolTable.find(firstToken);
+      if (duplicateSymbol == nullptr)
+        symbolTable.newSymbol(firstToken, LABEL, programCounter);
+      else {
+        errorCount++;
+        lisFile << err << "Symbol already exist: " << firstToken << endl;
+      }
+    } else {
       errorCount++;
-      lisFile << err << "Symbol already exist: " << firstToken << endl;
+      lisFile << err << "Invalid label" << endl;
     }
-  } else {
-    errorCount++;
-    lisFile << err << "Invalid label" << endl;
   }
 }
 
