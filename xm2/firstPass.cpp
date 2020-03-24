@@ -19,8 +19,8 @@ void createHeader(string fileName) {
 }
 
 void printLine(unsigned ln, short pc, string line) {
-  lisFile << ln << setw(8) << pc << setw(8);
-  lisFile << hex << "0x" << setw(4) << setfill('0') << pc;
+  lisFile << ln << setw(8) << pc << hex;
+  lisFile << " (0x" << setw(4) << setfill('0') << pc << ")";
   lisFile << setfill(' ') << dec << "\t" << line << endl;
 }
 
@@ -30,16 +30,29 @@ void printTokens() {
   lisFile << endl;
 }
 
+void processDirectory(int commandIndex) {
+  auto command = commands[commandIndex];
+  switch (commandIndex) {
+    case (int)ORG:
+      lisFile << "org" << endl;
+      break;
+    default:
+      break;
+  }
+}
+
 bool processCommands(string cmd) {
   auto commandIndex = checkTable(cmd);
   if (commandIndex == COMMAND_NOT_FOUND)
     return false;
   else {
     auto command = commands[commandIndex];
-    if (command.type == DIRECTORY)
-      programCounter += 0;
-    else
+    if (command.type == DIRECTORY) {
+      processDirectory(commandIndex);
+    } else {
+      lisFile << command.name << endl;
       programCounter += 2;
+    }
     return true;
   }
 }
