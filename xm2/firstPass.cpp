@@ -41,6 +41,14 @@ void processDirectory(int commandIndex) {
   }
 }
 
+void processOpadans() {
+  auto opToken = tokens.end();
+  auto ops = tokenize(opToken, false, ",");
+  lisFile << "Ops: ";
+  for (auto o : ops) lisFile << o << "\t";
+  lisFile << endl;
+}
+
 bool processCommands(string cmd) {
   auto commandIndex = checkTable(cmd);
   if (commandIndex == COMMAND_NOT_FOUND)
@@ -51,6 +59,7 @@ bool processCommands(string cmd) {
       processDirectory(commandIndex);
     } else {
       lisFile << command.name << endl;
+      processOpadans();
       programCounter += 2;
     }
     return true;

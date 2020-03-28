@@ -6,6 +6,12 @@ using namespace std;
 #ifndef ASSEMBLER_H
 #define ASSEMBLER_H
 
+/* enum TokenStates {
+  firstToken,
+  insDir,
+  oparands
+}; */
+
 vector<string> tokenize(string, bool = true, string = "\\s+");
 
 void assembler(string);

@@ -11,4 +11,7 @@
 #include "assembler.hpp"
 #include "commands.hpp"
 #include "constants.hpp"
+#include "oparands.hpp"
 #include "symbols.hpp"
+
+using namespace std;
