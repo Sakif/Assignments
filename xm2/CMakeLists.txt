@@ -8,5 +8,4 @@ set(CMAKE_CXX_FLAGS "-O3 -Wall -Wextra -Werror -ferror-limit=5")
 
 project(Assembler)
 
-add_executable(assembler main.cpp assembler.cpp symbols.cpp firstPass.cpp commands.cpp)
-
+add_executable(assembler oparands.cpp commands.cpp main.cpp assembler.cpp symbols.cpp firstPass.cpp)

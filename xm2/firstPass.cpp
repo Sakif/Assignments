@@ -19,12 +19,16 @@ void createHeader(string fileName) {
 }
 
 void printLine(unsigned ln, short pc, string line) {
-  lisFile << ln << setw(8) << pc << hex;
-  lisFile << " (0x" << setw(4) << setfill('0') << pc << ")";
+  /* print line number */
+  lisFile << ln << setw(8);
+  /* print the program counter as both decimal and hex */
+  lisFile << pc << hex << " (0x" << setw(4) << setfill('0') << pc << ")";
+  /* print the actual line */
   lisFile << setfill(' ') << dec << "\t" << line << endl;
 }
 
 void printTokens() {
+  /* good for debugging */
   lisFile << "Tokens: ";
   for (auto tok : tokens) lisFile << tok << "\t";
   lisFile << endl;
@@ -41,14 +45,6 @@ void processDirectory(int commandIndex) {
   }
 }
 
-void processOpadans() {
-  auto opToken = tokens.end();
-  auto ops = tokenize(opToken, false, ",");
-  lisFile << "Ops: ";
-  for (auto o : ops) lisFile << o << "\t";
-  lisFile << endl;
-}
-
 bool processCommands(string cmd) {
   auto commandIndex = checkTable(cmd);
   if (commandIndex == COMMAND_NOT_FOUND)
@@ -59,7 +55,7 @@ bool processCommands(string cmd) {
       processDirectory(commandIndex);
     } else {
       lisFile << command.name << endl;
-      processOpadans();
+      processOperands();
       programCounter += 2;
     }
     return true;
