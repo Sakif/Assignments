@@ -1,7 +1,5 @@
 #include "all.hpp"
 
-using namespace std;
-
 ifstream asmFile;
 ofstream lisFile;
 unsigned lineNumber;

@@ -1,5 +1,7 @@
 #include "all.hpp"
 
+extern ofstream lisFile;
+
 Command commands[COMMAND_TABLE_SIZE] = {
     {"ADD", INSTRUCTION, 2, CR_R, W, 0x4000},
     {"ADD.B", INSTRUCTION, 2, CR_R, B, 0x4040},
@@ -98,4 +100,19 @@ int checkTable(string cmd) {
       low = mid + 1;
   }
   return COMMAND_NOT_FOUND;
+}
+
+void processDirectory(int commandIndex) {
+  auto command = commands[commandIndex];
+  switch (commandIndex) {
+    case (int)ORG:
+      lisFile << "Directory: org" << endl;
+      break;
+    case (int)EQU:
+      lisFile << "Directory: equ" << endl;
+      break;
+    default:
+      lisFile << "Not a directory" << endl;
+      break;
+  }
 }

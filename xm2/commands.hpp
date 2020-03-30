@@ -1,8 +1,6 @@
 #pragma once
 #include "all.hpp"
 
-using namespace std;
-
 #ifndef COMMANDS_H
 #define COMMANDS_H
 

@@ -1,7 +1,5 @@
 #include "all.hpp"
 
-using namespace std;
-
 extern ifstream asmFile;
 extern ofstream lisFile;
 extern unsigned lineNumber;
@@ -39,7 +37,6 @@ bool numeric(string op) {
   } else {
     lisFile << "Check symbol table" << endl;
   }
-
   return num;
 }
 
@@ -47,7 +44,6 @@ bool validConstant(unsigned short value) {
   unsigned short constants[] = {0, 1, 2, 4, 8, 16, 32, 0xFFFF};
   for (auto c : constants)
     if (value == c) return true;
-
   return false;
 }
 

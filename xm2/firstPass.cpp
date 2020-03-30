@@ -1,7 +1,5 @@
 #include "all.hpp"
 
-using namespace std;
-
 extern ifstream asmFile;
 extern ofstream lisFile;
 extern unsigned lineNumber;
@@ -32,17 +30,6 @@ void printTokens() {
   lisFile << "Tokens: ";
   for (auto tok : tokens) lisFile << tok << "\t";
   lisFile << endl;
-}
-
-void processDirectory(int commandIndex) {
-  auto command = commands[commandIndex];
-  switch (commandIndex) {
-    case (int)ORG:
-      lisFile << "org" << endl;
-      break;
-    default:
-      break;
-  }
 }
 
 bool processCommands(string cmd) {

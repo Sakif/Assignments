@@ -5,8 +5,6 @@ Author: Sakif Fahmid Zaman
 #pragma once
 #include "all.hpp"
 
-using namespace std;
-
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 

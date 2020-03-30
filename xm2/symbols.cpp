@@ -4,8 +4,6 @@ Author: Sakif Fahmid Zaman
 
 #include "all.hpp"
 
-using namespace std;
-
 Symbol::Symbol(string n, SymbolType t, short v, Symbol* next) {
   symbolName = n;
   type = t;

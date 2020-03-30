@@ -1,7 +1,5 @@
 #include "all.hpp"
 
-using namespace std;
-
 int main(int argc, char** argv) {
   if (argc >= 2) {
     if (argc > 2) cout << "!\tCannot compile more than 1 file at a time. Compiling the first file." << endl;
