@@ -105,12 +105,34 @@ int checkTable(string cmd) {
 void processDirectory(int commandIndex) {
   auto command = commands[commandIndex];
   switch (commandIndex) {
-    case (int)ORG:
-      lisFile << "Directory: org" << endl;
+    case ALIGN:
+      lisFile << "Directory: align" << endl;
       break;
-    case (int)EQU:
+
+    case BSS:
+      lisFile << "Directory: bss" << endl;
+      break;
+
+    case BYTE:
+      lisFile << "Directory: byte" << endl;
+      break;
+
+    case END:
+      lisFile << "Directory: end" << endl;
+      break;
+
+    case EQU:
       lisFile << "Directory: equ" << endl;
       break;
+
+    case ORG:
+      lisFile << "Directory: org" << endl;
+      break;
+
+    case WORD:
+      lisFile << "Directory: word" << endl;
+      break;
+
     default:
       lisFile << "Not a directory" << endl;
       break;

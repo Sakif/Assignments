@@ -92,7 +92,10 @@ bool firstPass(string fileName) {
       errorCount++;
       lisFile << err << "Encountered unexpected token" << endl;
     }
-    checkFirstToken();
+    if (tokens.size() > 1)
+      checkFirstToken();
+    if (tokens.size() > 2) {
+    }
   }
   lisFile << symbolTable << endl;
   lisFile << "Error count: " << errorCount << endl;
