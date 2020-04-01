@@ -10,8 +10,8 @@
 #define NOT_FOUND -1
 #define ESCAPE_CHARACTER_LENGTH 4
 
-void processOperands(int);
+void processOperands(int const);
 
-void processDirectory(int);
+void processDirectory(int const);
 
 #endif

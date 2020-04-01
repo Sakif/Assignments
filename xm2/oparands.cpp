@@ -1,15 +1,13 @@
 #include "all.hpp"
 
-void processOperands(int commandIndex) {
+void processOperands(int const commandIndex) {
   /* operands are at the end of */
-  auto command = commands[commandIndex];
-  unsigned long count = command.opCount;
+  unsigned long count = commands[commandIndex].opCount;
   auto end = tokens.size() - 1;
   auto opToken = tokens.at(end);
-  /* tokenize on , */
+  /* tokenize on , ignore comments as it should be already removed */
   auto ops = tokenize(opToken, false, ",");
-  if (ops.size() != count)
-    lisFile << err << "Invalid number of ops." << endl;
+  if (ops.size() != count) lisFile << err << "Invalid number of ops." << endl;
 }
 
 bool numeric(string op) {
