@@ -1,13 +1,5 @@
 #include "all.hpp"
 
-extern ifstream asmFile;
-extern ofstream lisFile;
-extern unsigned lineNumber;
-extern short programCounter;
-extern unsigned errorCount;
-extern vector<string> tokens;
-extern SymbolTable symbolTable;
-
 void createHeader(string fileName) {
   if (lisFile.is_open()) {
     lisFile << "XM2 assembler" << endl;
@@ -30,42 +22,6 @@ void printTokens() {
   lisFile << "Tokens: ";
   for (auto tok : tokens) lisFile << tok << "\t";
   lisFile << endl;
-}
-
-bool processCommands(string cmd) {
-  auto commandIndex = checkTable(cmd);
-  if (commandIndex == COMMAND_NOT_FOUND)
-    return false;
-  else {
-    auto command = commands[commandIndex];
-    if (command.type == DIRECTORY) {
-      processDirectory(commandIndex);
-    } else {
-      lisFile << command.name << endl;
-      processOperands();
-      programCounter += 2;
-    }
-    return true;
-  }
-}
-
-void checkFirstToken() {
-  auto firstToken = tokens[0];
-  auto isCommand = processCommands(firstToken);
-  if (!isCommand) {
-    if (validLabel(firstToken)) {
-      auto duplicateSymbol = symbolTable.find(firstToken);
-      if (duplicateSymbol == nullptr)
-        symbolTable.newSymbol(firstToken, LABEL, programCounter);
-      else {
-        errorCount++;
-        lisFile << err << "Symbol already exist: " << firstToken << endl;
-      }
-    } else {
-      errorCount++;
-      lisFile << err << "Invalid label" << endl;
-    }
-  }
 }
 
 vector<string> tokenize(string line, bool removeComment, string delim) {
@@ -92,10 +48,9 @@ bool firstPass(string fileName) {
       errorCount++;
       lisFile << err << "Encountered unexpected token" << endl;
     }
-    if (tokens.size() > 1)
-      checkFirstToken();
-    if (tokens.size() > 2) {
-    }
+    auto firstTokenLabel = checkFirstToken();
+    if (firstTokenLabel)
+      checkSecondToken();
   }
   lisFile << symbolTable << endl;
   lisFile << "Error count: " << errorCount << endl;

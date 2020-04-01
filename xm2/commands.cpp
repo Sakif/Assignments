@@ -1,8 +1,54 @@
 #include "all.hpp"
 
-extern ofstream lisFile;
+bool processCommands(string cmd) {
+  auto commandIndex = checkTable(cmd);
+  if (commandIndex == COMMAND_NOT_FOUND)
+    return false;
+  else {
+    auto command = commands[commandIndex];
+    if (command.type == DIRECTORY) {
+      processDirectory(commandIndex);
+    } else {
+      lisFile << command.name << endl;
+      processOperands();
+      programCounter += 2;
+    }
+    return true;
+  }
+}
 
-Command commands[COMMAND_TABLE_SIZE] = {
+bool checkSecondToken() {
+  if (tokens.size() > 1) {
+    auto secondToken = tokens[1];
+    processCommands(secondToken);
+  }
+  return true;
+}
+
+bool checkFirstToken() {
+  auto tokenIsLable = false;
+  auto firstToken = tokens[0];
+  auto isCommand = processCommands(firstToken);
+  if (!isCommand) {
+    tokenIsLable = true;
+    if (validLabel(firstToken)) {
+      auto duplicateSymbol = symbolTable.find(firstToken);
+      if (duplicateSymbol == nullptr)
+        symbolTable.newSymbol(firstToken, LABEL, programCounter);
+      else {
+        errorCount++;
+        lisFile << err << "Symbol already exist: " << firstToken << endl;
+      }
+    } else {
+      errorCount++;
+      lisFile << err << "Invalid label" << endl;
+    }
+  }
+  return tokenIsLable;
+}
+
+/*Command commands[COMMAND_TABLE_SIZE]*/
+const vector<Command> commands = {
     {"ADD", INSTRUCTION, 2, CR_R, W, 0x4000},
     {"ADD.B", INSTRUCTION, 2, CR_R, B, 0x4040},
     {"ADD.W", INSTRUCTION, 2, CR_R, W, 0x4000},
@@ -89,7 +135,7 @@ Command commands[COMMAND_TABLE_SIZE] = {
 
 int checkTable(string cmd) {
   for_each(cmd.begin(), cmd.end(), [](char& c) { c = ::toupper(c); });
-  int low = 0, high = COMMAND_TABLE_SIZE - 1;
+  int low = 0, high = commands.size() - 1;
   while (low <= high) {
     int mid = low + (high - low) / 2;
     if (strcmp(cmd.c_str(), commands[mid].name.c_str()) == 0)

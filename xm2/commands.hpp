@@ -4,7 +4,6 @@
 #ifndef COMMANDS_H
 #define COMMANDS_H
 
-#define COMMAND_TABLE_SIZE 83
 #define COMMAND_NOT_FOUND -1
 
 enum CommandType {
@@ -131,8 +130,11 @@ struct Command {
   unsigned int pcIncriment;
 };
 
-extern Command commands[COMMAND_TABLE_SIZE];
+extern const vector<Command> commands;
+//extern Command commands[COMMAND_TABLE_SIZE];
 
 int checkTable(string);
+bool checkFirstToken();
+bool checkSecondToken();
 
 #endif
