@@ -1,7 +1,7 @@
 #include "all.hpp"
 
 bool processCommands(string cmd) {
-  auto commandIndex = checkTable(cmd);
+  auto commandIndex = checkCommandsTable(cmd);
   if (commandIndex == COMMAND_NOT_FOUND)
     return false;
   else {
@@ -9,8 +9,7 @@ bool processCommands(string cmd) {
     if (command.type == DIRECTORY) {
       processDirectory(commandIndex);
     } else {
-      lisFile << command.name << endl;
-      processOperands();
+      processOperands(commandIndex);
       programCounter += 2;
     }
     return true;
@@ -133,7 +132,7 @@ const vector<Command> commands = {
     {"XOR.B", INSTRUCTION, 2, CR_R, B, 0x4640},
     {"XOR.W", INSTRUCTION, 2, CR_R, W, 0x4600}};
 
-int checkTable(string cmd) {
+int checkCommandsTable(string cmd) {
   for_each(cmd.begin(), cmd.end(), [](char& c) { c = ::toupper(c); });
   int low = 0, high = commands.size() - 1;
   while (low <= high) {

@@ -4,7 +4,7 @@ set(CMAKE_CXX_COMPILER /usr/bin/clang++)
 set(CMAKE_C_COMPILER /usr/bin/clang)
 
 #set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_CXX_FLAGS "-O3 -Wall -Wextra -Werror -ferror-limit=5")
+set(CMAKE_CXX_FLAGS "-O3 -Wall -Wextra -Werror -ferror-limit=1")
 
 project(Assembler)
 

@@ -133,7 +133,7 @@ struct Command {
 extern const vector<Command> commands;
 //extern Command commands[COMMAND_TABLE_SIZE];
 
-int checkTable(string);
+int checkCommandsTable(string);
 bool checkFirstToken();
 bool checkSecondToken();
 

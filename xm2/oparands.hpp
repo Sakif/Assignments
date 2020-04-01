@@ -10,7 +10,7 @@
 #define NOT_FOUND -1
 #define ESCAPE_CHARACTER_LENGTH 4
 
-void processOperands();
+void processOperands(int);
 
 void processDirectory(int);
 
