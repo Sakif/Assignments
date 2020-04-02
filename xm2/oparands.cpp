@@ -30,7 +30,7 @@ bool numeric(string op) {
 }
 
 bool validConstant(unsigned short value) {
-  unsigned short constants[] = {0, 1, 2, 4, 8, 16, 32, 0xFFFF};
+  unsigned short const constants[] = {0, 1, 2, 4, 8, 16, 32, 0xFFFF};
   for (auto c : constants)
     if (value == c) return true;
   return false;
@@ -64,6 +64,7 @@ int encodeConstants(int value) {
       enc = 7;
       break;
     default:
+      enc = -1;
       break;
   }
   return enc;

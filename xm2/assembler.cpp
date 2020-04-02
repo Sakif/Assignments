@@ -8,7 +8,7 @@ unsigned errorCount;
 vector<string> tokens;
 SymbolTable symbolTable;
 
-void assembler(string file) {
+void assembler(string const file) {
   auto extention = file.substr(file.find_last_of('.'));
   if (extention == ".asm") {
     auto outFile = file.substr(0, file.find_last_of('.'));

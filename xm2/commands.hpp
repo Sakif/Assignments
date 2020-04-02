@@ -135,6 +135,7 @@ extern const vector<Command> commands;
 
 int checkCommandsTable(string);
 bool checkFirstToken();
+void processDirectory(int const);
 bool checkSecondToken();
 
 #endif

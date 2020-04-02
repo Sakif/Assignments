@@ -12,6 +12,4 @@
 
 void processOperands(int const);
 
-void processDirectory(int const);
-
 #endif

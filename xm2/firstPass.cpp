@@ -10,7 +10,7 @@ void createHeader(string fileName) {
 
 void printLine(unsigned ln, short pc, string line) {
   /* print line number */
-  lisFile << ln << setw(8);
+  lisFile << setw(8) << ln << setw(8);
   /* print the program counter as both decimal and hex */
   lisFile << pc << hex << " (0x" << setw(4) << setfill('0') << pc << ")";
   /* print the actual line */
@@ -48,9 +48,10 @@ bool firstPass(string fileName) {
       errorCount++;
       lisFile << err << "Encountered unexpected token" << endl;
     }
-    auto firstTokenLabel = checkFirstToken();
-    if (firstTokenLabel)
-      checkSecondToken();
+    if (tokens.size() > 0) {
+      auto firstTokenLabel = checkFirstToken();
+      if (firstTokenLabel) checkSecondToken();
+    }
   }
   lisFile << symbolTable << endl;
   lisFile << "Error count: " << errorCount << endl;

@@ -12,14 +12,14 @@ using namespace std;
   oparands
 }; */
 
-vector<string> tokenize(string, bool = true, string = "\\s+");
+vector<string> tokenize(string const, bool = true, string = "\\s+");
 
-void assembler(string);
+void assembler(string const);
 
 void endAssembler();
 
 string currentTime();
 
-bool firstPass(string);
+bool firstPass(string const);
 
 #endif

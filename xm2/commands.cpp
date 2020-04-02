@@ -1,7 +1,7 @@
 #include "all.hpp"
 
-bool processCommands(string cmd) {
-  auto commandIndex = checkCommandsTable(cmd);
+bool processCommands(string const cmd) {
+  auto const commandIndex = checkCommandsTable(cmd);
   if (commandIndex == COMMAND_NOT_FOUND)
     return false;
   else {
@@ -26,7 +26,7 @@ bool checkSecondToken() {
 
 bool checkFirstToken() {
   auto tokenIsLable = false;
-  auto firstToken = tokens[0];
+  auto const firstToken = tokens[0];
   auto isCommand = processCommands(firstToken);
   if (!isCommand) {
     tokenIsLable = true;
@@ -147,11 +147,11 @@ int checkCommandsTable(string cmd) {
   return COMMAND_NOT_FOUND;
 }
 
-void processDirectory(int commandIndex) {
-  auto command = commands[commandIndex];
+void processDirectory(int const commandIndex) {
+  //  auto command = commands[commandIndex];
   switch (commandIndex) {
     case ALIGN:
-      lisFile << "Directory: align" << endl;
+      if (programCounter % 2 != 0) programCounter++;
       break;
 
     case BSS:
@@ -159,7 +159,7 @@ void processDirectory(int commandIndex) {
       break;
 
     case BYTE:
-      lisFile << "Directory: byte" << endl;
+      programCounter++;
       break;
 
     case END:
@@ -175,7 +175,7 @@ void processDirectory(int commandIndex) {
       break;
 
     case WORD:
-      lisFile << "Directory: word" << endl;
+      programCounter += 2;
       break;
 
     default:
