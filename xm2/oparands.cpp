@@ -2,12 +2,23 @@
 
 void processOperands(int const commandIndex) {
   /* operands are at the end of */
-  unsigned long count = commands[commandIndex].opCount;
+  unsigned long opCount = commands[commandIndex].opCount;
   auto end = tokens.size() - 1;
   auto opToken = tokens.at(end);
   /* tokenize on , ignore comments as it should be already removed */
   auto ops = tokenize(opToken, false, ",");
-  if (ops.size() != count) lisFile << err << "Invalid number of ops." << endl;
+  if (ops.size() != opCount) lisFile << err << "Invalid number of ops." << endl;
+}
+
+short tokenToShort(string opToken) {
+  short num = 0;
+  auto firstChar = opToken[0];
+  opToken.erase(opToken.begin());
+  if (firstChar == '#')
+    num = stoi(opToken);
+  else if (firstChar == '$')
+    num = stoi(opToken, 0, 16);
+  return num;
 }
 
 bool numeric(string op) {
