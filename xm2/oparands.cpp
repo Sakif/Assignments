@@ -3,11 +3,72 @@
 void processOperands(int const commandIndex) {
   /* operands are at the end of */
   unsigned long opCount = commands[commandIndex].opCount;
+  auto opType = commands[commandIndex].ops;
   auto end = tokens.size() - 1;
   auto opToken = tokens.at(end);
   /* tokenize on , ignore comments as it should be already removed */
   auto ops = tokenize(opToken, false, ",");
-  if (ops.size() != opCount) lisFile << err << "Invalid number of ops." << endl;
+  if (ops.size() != opCount)
+    lisFile << err << "Invalid number of ops." << endl;
+  else {
+    switch (opType) {
+      case NONE:
+        break;
+
+      case CR_R:
+        break;
+
+      case R_R:
+        break;
+
+      case C:
+        break;
+
+      case R:
+        break;
+
+      case Opt:
+        break;
+
+      case V:
+        break;
+
+      case CEXop:
+        break;
+
+      case SA:
+        break;
+
+      case LDop:
+        break;
+
+      case STop:
+        break;
+
+      case LDRop:
+        break;
+
+      case STRop:
+        break;
+
+      case BRAop:
+        break;
+
+      case BRA13:
+        break;
+
+      case V_R:
+        break;
+
+      default:
+        cout << "Not default op." << endl;
+        break;
+    }
+  }
+}
+
+void processOpToken(string op) {
+  auto firstChar = op[0];
 }
 
 short tokenToShort(string opToken) {
