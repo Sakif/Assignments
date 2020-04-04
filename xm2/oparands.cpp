@@ -1,5 +1,55 @@
 #include "all.hpp"
 
+void processCRR(string op1, string op2) {
+  auto sym2 = symbolTable.find(op2);
+  if (sym2 == nullptr) {
+    errorCount++;
+    lisFile << err << "Second operand must be register" << endl;
+  } else {
+    if (sym2->type != REGISTER) {
+      errorCount++;
+      lisFile << err << "Second operand must be register" << endl;
+    }
+  }
+  if (op1[0] == '#' || op1[0] == '$')
+    lisFile << "op1 constant" << endl;
+  else {
+    auto sym1 = symbolTable.find(op1);
+    if (sym1 == nullptr) symbolTable.newSymbol(op1, UNKNOWN, 0);
+  }
+}
+
+void processRR(string op1, string op2) {
+  auto sym1 = symbolTable.find(op1);
+  if (sym1 == nullptr) {
+    errorCount++;
+    lisFile << err << "Second operand must be register" << endl;
+  } else {
+    if (sym1->type != REGISTER) {
+      errorCount++;
+      lisFile << err << "Second operand must be register" << endl;
+    }
+  }
+
+  auto sym2 = symbolTable.find(op2);
+  if (sym2 == nullptr) {
+    errorCount++;
+    lisFile << err << "Second operand must be register" << endl;
+  } else {
+    if (sym2->type != REGISTER) {
+      errorCount++;
+      lisFile << err << "Second operand must be register" << endl;
+    }
+  }
+}
+
+void processC(string op) {
+  if (op1[0] != '#' && op1[0] != '$') {
+    errorCount++;
+    lisFile << err << "Expected a constant" << endl;
+  }
+}
+
 void processOperands(int const commandIndex) {
   /* operands are at the end of */
   unsigned long opCount = commands[commandIndex].opCount;
@@ -12,16 +62,16 @@ void processOperands(int const commandIndex) {
     lisFile << err << "Invalid number of ops." << endl;
   else {
     switch (opType) {
-      case NONE:
-        break;
-
       case CR_R:
+        processCRR(ops[0], ops[1]);
         break;
 
       case R_R:
+        processRR(ops[0], ops[1]);
         break;
 
       case C:
+        processC(ops[0]);
         break;
 
       case R:
@@ -67,10 +117,6 @@ void processOperands(int const commandIndex) {
   }
 }
 
-void processOpToken(string op) {
-  auto firstChar = op[0];
-}
-
 short tokenToShort(string opToken) {
   short num = 0;
   auto firstChar = opToken[0];
@@ -79,25 +125,6 @@ short tokenToShort(string opToken) {
     num = stoi(opToken);
   else if (firstChar == '$')
     num = stoi(opToken, 0, 16);
-  return num;
-}
-
-bool numeric(string op) {
-  auto num = false;
-  auto firstChar = op[0];
-  if (firstChar == '#') {
-    lisFile << "# number" << endl;
-    num = true;
-  } else if (firstChar == '$') {
-    lisFile << "$ number" << endl;
-    num = true;
-  } else if (firstChar == '\'') {
-    lisFile << "space" << endl;
-  } else if (firstChar == '\\') {
-    lisFile << "Escape character" << endl;
-  } else {
-    lisFile << "Check symbol table" << endl;
-  }
   return num;
 }
 
