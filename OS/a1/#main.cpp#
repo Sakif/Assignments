@@ -1,0 +1,16 @@
+#include "main.hpp"
+
+using namespace std;
+
+int main(int argc, char **argv) {
+	if (argc == 2) {
+		string arg = argv[1];
+		if (arg.compare("-randomize") == 0) {
+			srandom(time(NULL));
+		} else {
+			days_to_simulate = atoi(argv[1]);
+		}
+	} else if (argc > 2) {
+	}
+	return 0;
+}
